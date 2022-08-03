@@ -35,10 +35,28 @@ const theme = {
     random11: "#5700E3",
   },
   fonts: {
-    fontWeight700: 700,
-    fontWeight600: 600,
-    fontWeight500: 500,
-    fontWeight400: 400,
+    "heading-1-700": "700 44px 'Lexend'",
+    "heading-2-600": "600 36px 'Lexend",
+    "heading-3-600": "600 32px 'Lexend",
+    "heading-3-500": "500 32px 'Lexend",
+    "heading-4-600": "600 28px 'Lexend",
+    "heading-4-500": "500 28px 'Lexend",
+    "heading-5-600": "600 24px 'Lexend",
+    "heading-5-500": "500 24px 'Lexend",
+    "heading-6-600": "600 20px 'Lexend",
+    "heading-6-500": "500 20px 'Lexend",
+    "heading-7-600": "600 16px 'Lexend",
+    "heading-7-500": "500 16px 'Lexend",
+
+    "body-1-400": "400 16px 'Inter'",
+    "body-1-600": "600 16px 'Inter'",
+    "body-2-400": "400 14px 'Inter'",
+    "body-2-500": "500 14px 'Inter'",
+
+    "button-big-text": "600 16px 'Inter'",
+    "button-medium-text": "600 14px 'Inter'",
+    "input-placeholder": "400 16px 'Inter'",
+    "input-label": "500 14px 'Inter'",
   },
 };
 

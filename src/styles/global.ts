@@ -25,7 +25,6 @@ export default createGlobalStyle`
     time, mark, audio, video {
         font-size: 100%;
         font: inherit;
-        font-family: 'Lexend', sans-serif;
         vertical-align: baseline;
     }
     /* HTML5 display-role reset for older browsers */
