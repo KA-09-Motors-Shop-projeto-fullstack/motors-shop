@@ -1,7 +1,7 @@
 import React, { ReactNode } from "react";
 import { ButtonStyled } from "./styles";
 
-export interface IProps {
+export interface IPropsButton {
   typeFont: "big" | "medium";
   typeButton:
     | "default"
@@ -22,7 +22,7 @@ export interface IProps {
   children?: ReactNode;
 }
 
-const Button: React.FC<IProps> = ({ children, typeFont, typeButton }) => {
+const Button: React.FC<IPropsButton> = ({ children, typeFont, typeButton }) => {
   return (
     <ButtonStyled typeButton={typeButton} typeFont={typeFont}>
       {children}
