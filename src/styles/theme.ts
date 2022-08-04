@@ -14,7 +14,7 @@ const theme = {
     grey7: "#E9ECEF",
     grey8: "#F1F3F5",
     grey9: "#F8F9FA",
-    gray10: "#FDFDFD",
+    grey10: "#FDFDFD",
     whiteFixed: "#FFFFFF",
     alert1: "#CD2B31",
     alert2: "#FDD8D8",
