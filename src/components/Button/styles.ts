@@ -1,8 +1,8 @@
 import styled, { css } from "styled-components";
-import { IProps } from ".";
+import { IPropsButton } from ".";
 
 class Buttons {
-  static default = css<IProps>`
+  static default = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.grey0};
     color: ${(props) => props.theme.colors.whiteFixed};
     border: 1.5px solid ${(props) => props.theme.colors.grey0};
@@ -13,7 +13,7 @@ class Buttons {
     }
   `;
 
-  static negative = css<IProps>`
+  static negative = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.grey6};
     color: ${(props) => props.theme.colors.grey2};
     border: 1.5px solid ${(props) => props.theme.colors.grey6};
@@ -24,14 +24,14 @@ class Buttons {
     }
   `;
 
-  static disable = css<IProps>`
+  static disable = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.grey5};
     color: ${(props) => props.theme.colors.whiteFixed};
     border: 1.5px solid ${(props) => props.theme.colors.grey5};
     border-radius: 4px;
   `;
 
-  static brand1 = css<IProps>`
+  static brand1 = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.brand1};
     color: ${(props) => props.theme.colors.whiteFixed};
     border: 1.5px solid ${(props) => props.theme.colors.brand1};
@@ -42,7 +42,7 @@ class Buttons {
     }
   `;
 
-  static brandOpacity = css<IProps>`
+  static brandOpacity = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.brand4};
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand4};
@@ -53,7 +53,7 @@ class Buttons {
     }
   `;
 
-  static light = css<IProps>`
+  static light = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.grey10};
     color: ${(props) => props.theme.colors.grey1};
     border: 1.5px solid ${(props) => props.theme.colors.grey10};
@@ -64,7 +64,7 @@ class Buttons {
     }
   `;
 
-  static outlineLigth = css<IProps>`
+  static outlineLigth = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.grey10};
     color: ${(props) => props.theme.colors.grey10};
     border: 1.5px solid ${(props) => props.theme.colors.grey10};
@@ -75,19 +75,19 @@ class Buttons {
     }
   `;
 
-  static outline1 = css<IProps>`
+  static outline1 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.grey0};
     border: 1.5px solid ${(props) => props.theme.colors.grey0};
     border-radius: 4px;
   `;
 
-  static outline2 = css<IProps>`
+  static outline2 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.grey0};
     border: 1.5px solid ${(props) => props.theme.colors.grey4};
     border-radius: 4px;
   `;
 
-  static outlineBrand1 = css<IProps>`
+  static outlineBrand1 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand1};
     border-radius: 4px;
@@ -97,20 +97,20 @@ class Buttons {
     }
   `;
 
-  static outlineBrand2 = css<IProps>`
+  static outlineBrand2 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand1};
     border-radius: 4px;
   `;
 
-  static link = css<IProps>`
+  static link = css<IPropsButton>`
     color: ${(props) => props.theme.colors.grey0};
     :hover {
       background-color: ${(props) => props.theme.colors.grey8};
     }
   `;
 
-  static alert = css<IProps>`
+  static alert = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.alert3};
     border: 1.5px solid ${(props) => props.theme.colors.alert3};
     border-radius: 4px;
@@ -121,7 +121,7 @@ class Buttons {
     }
   `;
 
-  static sucess = css<IProps>`
+  static sucess = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.sucess3};
     border: 1.5px solid ${(props) => props.theme.colors.sucess3};
     border-radius: 4px;
@@ -132,23 +132,23 @@ class Buttons {
     }
   `;
 
-  static brandDisable = css<IProps>`
+  static brandDisable = css<IPropsButton>`
     background-color: ${(props) => props.theme.colors.brand3};
     border: 1.5px solid ${(props) => props.theme.colors.brand3};
     border-radius: 4px;
     color: ${(props) => props.theme.colors.brand4};
   `;
-  static big = css<IProps>`
+  static big = css<IPropsButton>`
     font: ${(props) => props.theme.fonts["button-big-text"]};
     padding: 12px 28px;
   `;
-  static medium = css<IProps>`
+  static medium = css<IPropsButton>`
     font: ${(props) => props.theme.fonts["button-medium-text"]};
     padding: 12px 20px;
   `;
 }
 
-export const ButtonStyled = styled.button<IProps>`
+export const ButtonStyled = styled.button<IPropsButton>`
   ${(props) => props.typeFont === "big" && Buttons.big}
   ${(props) => props.typeFont === "medium" && Buttons.medium}
   ${(props) => props.typeButton === "default" && Buttons.default}
