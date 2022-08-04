@@ -10,8 +10,7 @@ const root = createRoot(container);
 
 root.render(
   <ThemeProvider theme={theme}>
-    <App />
-
     <GlobalStyled />
+    <App />
   </ThemeProvider>
 );
