@@ -1,5 +1,5 @@
 import React, { ReactNode } from "react";
-import { HeaderStyle, Ul, Container } from "./styles";
+import { HeaderStyle, Ul, Container, Line } from "./styles";
 import Logo from "../../assets/Logo.svg";
 import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
 import { Link } from "react-router-dom";
@@ -7,9 +7,10 @@ import Button from "../Button";
 
 interface IPropsHeader {
   children?: ReactNode;
+  authenticaded: boolean;
 }
 
-const Header: React.FC<IPropsHeader> = ({ children }) => {
+const Header: React.FC<IPropsHeader> = ({ children, authenticaded }) => {
   return (
     <HeaderStyle>
       <Container>
@@ -52,11 +53,21 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
                 Leilão
               </LinkScroll>
             </li>
-            <li>
-              <Button typeFont="big" typeButton="outline2">
-                Cadastrar
-              </Button>
-            </li>
+            <Line />
+            {authenticaded ? (
+              <h1>Autenticado</h1>
+            ) : (
+              <>
+                <li>
+                  <Link to="/login">Fazer login</Link>
+                </li>
+                <li>
+                  <Button typeFont="big" typeButton="outline2">
+                    Cadastrar
+                  </Button>
+                </li>
+              </>
+            )}
           </Ul>
         </nav>
       </Container>
