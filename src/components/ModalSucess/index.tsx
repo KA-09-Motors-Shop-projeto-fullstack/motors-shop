@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { Modal } from "react-bootstrap";
 import { Container, ModalTitle, ParagraphOne, ParagraphTwo } from "./styles";
 import Button from "../Button";
@@ -6,18 +6,21 @@ import { useHistory } from "react-router-dom";
 
 interface IPropsModalSucess {
   modalShow: boolean;
+  setModalShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-const ModalSucess: React.FC<IPropsModalSucess> = ({ modalShow }) => {
-  const [show, setShow] = useState(false);
+const ModalSucess: React.FC<IPropsModalSucess> = ({
+  modalShow,
+  setModalShow,
+}) => {
   const history = useHistory();
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setModalShow(false);
+  const handleShow = () => setModalShow(true);
   const goLogin = () => history.push("/login");
 
   return (
     <Container>
-      <Modal show={show} onHide={handleClose}>
+      <Modal show={modalShow} onHide={handleClose}>
         <Modal.Header closeButton>
           <ModalTitle>Sucesso!</ModalTitle>
         </Modal.Header>
