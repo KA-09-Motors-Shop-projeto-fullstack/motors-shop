@@ -1,6 +1,6 @@
 import React, { ReactNode } from "react";
 import { HeaderStyle, Ul, Container, Line } from "./styles";
-import Logo from "../../assets/Logo.svg";
+import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
 import { Link } from "react-router-dom";
 import Button from "../Button";
