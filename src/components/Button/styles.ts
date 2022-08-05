@@ -79,18 +79,21 @@ class Buttons {
     color: ${(props) => props.theme.colors.grey0};
     border: 1.5px solid ${(props) => props.theme.colors.grey0};
     border-radius: 4px;
+    background-color: transparent;
   `;
 
   static outline2 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.grey0};
     border: 1.5px solid ${(props) => props.theme.colors.grey4};
     border-radius: 4px;
+    background-color: transparent;
   `;
 
   static outlineBrand1 = css<IPropsButton>`
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand1};
     border-radius: 4px;
+    background-color: transparent;
     :hover {
       background-color: ${(props) => props.theme.colors.brand4};
       border: 1.5px solid ${(props) => props.theme.colors.brand4};
@@ -101,6 +104,7 @@ class Buttons {
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand1};
     border-radius: 4px;
+    background-color: transparent;
   `;
 
   static link = css<IPropsButton>`
