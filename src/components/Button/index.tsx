@@ -20,11 +20,21 @@ export interface IPropsButton {
     | "sucess"
     | "brandDisable";
   children?: ReactNode;
+  onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
-const Button: React.FC<IPropsButton> = ({ children, typeFont, typeButton }) => {
+const Button: React.FC<IPropsButton> = ({
+  children,
+  typeFont,
+  typeButton,
+  onClick,
+}) => {
   return (
-    <ButtonStyled typeButton={typeButton} typeFont={typeFont}>
+    <ButtonStyled
+      onClick={onClick}
+      typeButton={typeButton}
+      typeFont={typeFont}
+    >
       {children}
     </ButtonStyled>
   );

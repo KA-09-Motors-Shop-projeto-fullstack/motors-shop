@@ -5,6 +5,7 @@ import { ThemeProvider } from "styled-components";
 import App from "./App";
 import GlobalStyled from "./styles/global";
 import theme from "./styles/theme";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
