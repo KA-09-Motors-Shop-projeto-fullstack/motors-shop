@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ModalCreate from "../components/ModalCreate";
+import ProductCard from "../components/ProductCard";
 
 const Routes: React.FC = () => {
   const [modalShow, setModalShow] = useState<boolean>(false);
