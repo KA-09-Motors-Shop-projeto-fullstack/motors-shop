@@ -45,6 +45,7 @@ export const ContainerSpecifications = styled.div`
 `;
 
 export const VehicleTypeContainer = styled.div`
+  margin-top: 30px;
   div {
     display: flex;
     justify-content: space-between;
@@ -55,6 +56,9 @@ export const VehicleTypeContainer = styled.div`
 `;
 
 export const ImagesRegisterContainer = styled.div`
+  input {
+    width: 100%;
+  }
   button {
     padding: 10px 28px;
     margin-top: 25px;
