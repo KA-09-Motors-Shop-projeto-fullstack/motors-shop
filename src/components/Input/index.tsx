@@ -1,25 +1,35 @@
 import React, { ReactNode } from "react";
 import { Container, InputStyle, Label } from "./styles";
 
-interface IPropsInput {
+export interface IPropsInput {
   children?: ReactNode;
   register?: any;
   label: string;
   name: string;
   placeholder: string;
+  type: string;
+  error?: boolean;
 }
 
 const Input: React.FC<IPropsInput> = ({
   label,
   name,
+  type,
   children,
   register,
   placeholder,
+  error,
 }) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <InputStyle name={name} placeholder={placeholder} />
+      <InputStyle
+        {...register(name)}
+        type={type}
+        name={name}
+        placeholder={placeholder}
+        error={error}
+      />
     </Container>
   );
 };
