@@ -7,11 +7,13 @@ interface IPropsInput {
   label: string;
   name: string;
   placeholder: string;
+  type: string;
 }
 
 const Input: React.FC<IPropsInput> = ({
   label,
   name,
+  type,
   children,
   register,
   placeholder,
@@ -19,7 +21,7 @@ const Input: React.FC<IPropsInput> = ({
   return (
     <Container>
       <Label>{label}</Label>
-      <InputStyle name={name} placeholder={placeholder} />
+      <InputStyle type={type} name={name} placeholder={placeholder} />
     </Container>
   );
 };

@@ -15,7 +15,6 @@ const ModalSucess: React.FC<IPropsModalSucess> = ({
 }) => {
   const history = useHistory();
   const handleClose = () => setModalShow(false);
-  const handleShow = () => setModalShow(true);
   const goLogin = () => history.push("/login");
 
   return (

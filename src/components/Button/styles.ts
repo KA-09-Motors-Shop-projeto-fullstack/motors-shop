@@ -47,10 +47,6 @@ class Buttons {
     color: ${(props) => props.theme.colors.brand1};
     border: 1.5px solid ${(props) => props.theme.colors.brand4};
     border-radius: 4px;
-    :hover {
-      background-color: ${(props) => props.theme.colors.brand2};
-      border: 1.5px solid ${(props) => props.theme.colors.brand2};
-    }
   `;
 
   static light = css<IPropsButton>`
