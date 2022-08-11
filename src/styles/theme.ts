@@ -33,6 +33,7 @@ const theme = {
     random9: "#153D2E",
     random10: "#6100FF",
     random11: "#5700E3",
+    random12: "#30007D",
   },
   fonts: {
     "heading-1-700": "700 44px 'Lexend'",

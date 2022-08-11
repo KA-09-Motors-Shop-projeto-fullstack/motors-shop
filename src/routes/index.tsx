@@ -5,6 +5,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ModalCreate from "../components/ModalCreate";
 import ProductCard from "../components/ProductCard";
+import Profile from "../pages/Profile";
 
 const Routes: React.FC = () => {
   const [modalShow, setModalShow] = useState<boolean>(false);
@@ -13,10 +14,7 @@ const Routes: React.FC = () => {
     <Switch>
       <Route exact path="/">
         <Header authenticaded />
-        <Button typeButton="brand1" typeFont="big" onClick={show}>
-          Mostrar modal
-        </Button>
-        <ModalCreate modalShow={modalShow} setModalShow={setModalShow} />
+        <Profile />
         <Footer />
       </Route>
     </Switch>
