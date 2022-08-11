@@ -7,7 +7,7 @@ import {
 } from "../../@types/advertisements";
 
 interface IProps {
-  children: React.ReactNode;
+  children?: React.ReactNode;
 }
 
 export const AdvertisementContext =
