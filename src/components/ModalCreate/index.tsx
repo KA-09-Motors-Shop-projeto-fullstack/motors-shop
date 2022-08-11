@@ -22,26 +22,16 @@ interface IPropsModalCreate {
   modalShow: boolean;
   setModalShow: React.Dispatch<React.SetStateAction<boolean>>;
 }
-
-type Inputs = {
-  title: string;
-  year: string;
-  km: string;
-  price: string;
-  description: string;
-  coverImage: string;
-};
-
 const ModalCreate: React.FC<IPropsModalCreate> = ({
   modalShow,
   setModalShow,
 }) => {
   const history = useHistory();
   const handleClose = () => setModalShow(false);
-  const goLogin = () => history.push("/login");
   const [typeAd, setTypeAd] = useState<string>("sale");
   const [vehicleType, setVehicleType] = useState<string>("car");
   const [amountImage, setAmountImages] = useState<number[]>([1]);
+  const closeModal = () => setModalShow(false);
 
   const salesAd = () => setTypeAd("sale");
   const aucionAd = () => setTypeAd("auction");
@@ -207,7 +197,7 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
             </ImagesRegisterContainer>
           </Modal.Body>
           <Modal.Footer style={{ justifyContent: "flex-end" }}>
-            <Button typeButton="negative" typeFont="big">
+            <Button onClick={closeModal} typeButton="negative" typeFont="big">
               Cancelar
             </Button>
             {Object.keys(errors).length ? (

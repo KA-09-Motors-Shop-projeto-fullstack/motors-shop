@@ -8,8 +8,6 @@ import ProductCard from "../components/ProductCard";
 import Profile from "../pages/Profile";
 
 const Routes: React.FC = () => {
-  const [modalShow, setModalShow] = useState<boolean>(false);
-  const show = () => setModalShow(true);
   return (
     <Switch>
       <Route exact path="/">
