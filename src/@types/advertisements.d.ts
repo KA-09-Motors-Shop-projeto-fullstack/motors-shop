@@ -30,8 +30,8 @@ interface ICreateAdvertisement {
 
 export type AdvertisementContextType = {
   advertisements: IAdversiment[];
-  listAllAdvertisements: (token: string) => void;
-  listAdvertisementsPerUser: (token: string, userId: string) => void;
+  listAllAdvertisements: (token: string) => Promise<void>;
+  listAdvertisementsPerUser: (token: string, userId: string) => Promise<void>;
   showAdvertisement: (
     token: string,
     advertisementId: string
@@ -39,5 +39,5 @@ export type AdvertisementContextType = {
   createAdvertisement: (
     token: string,
     dataAdvertisement: ICreateAdvertisement
-  ) => void;
+  ) => Promise<void>;
 };
