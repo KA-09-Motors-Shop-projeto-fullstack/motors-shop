@@ -4,6 +4,7 @@ import Button from "../components/Button";
 import Footer from "../components/Footer";
 import Header from "../components/Header";
 import ModalCreate from "../components/ModalCreate";
+import PrivateRoute from "../components/PrivateRoute";
 import ProductCard from "../components/ProductCard";
 import Profile from "../pages/Profile";
 
@@ -11,10 +12,12 @@ const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Header authenticaded />
-        <Profile />
+        <Header />
         <Footer />
       </Route>
+      <PrivateRoute path="/profile">
+        <Profile />
+      </PrivateRoute>
     </Switch>
   );
 };

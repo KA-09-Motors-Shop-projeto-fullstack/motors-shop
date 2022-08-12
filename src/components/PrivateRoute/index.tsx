@@ -1,11 +1,8 @@
 import React from "react";
-import { Redirect, Route } from "react-router-dom";
+import { Redirect, Route, RouteProps } from "react-router-dom";
 import { isAuthenticated } from "../../services/auth";
 
-interface IProps {
-  children: React.ReactNode;
-}
-const PrivateRoute: React.FC<IProps> = ({ children, ...rest }) => {
+const PrivateRoute: React.FC<RouteProps> = ({ children, ...rest }) => {
   return (
     <>
       {isAuthenticated() ? (
