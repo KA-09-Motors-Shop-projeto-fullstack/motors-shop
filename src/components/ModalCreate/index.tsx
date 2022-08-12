@@ -20,27 +20,22 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { AdvertisementContext } from "../../providers/Advertisements";
 import { AdvertisementContextType } from "../../@types/advertisements";
 import ModalSucess from "../ModalSucess";
+import { ModalContext } from "../../providers/Modals";
+import { ModalContextType } from "../../@types/modals";
 
-interface IPropsModalCreate {
-  modalShow: boolean;
-  setModalShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
-const ModalCreate: React.FC<IPropsModalCreate> = ({
-  modalShow,
-  setModalShow,
-}) => {
+const ModalCreate: React.FC = () => {
   // Chamando o provider
   const { createAdvertisement } = useContext(
     AdvertisementContext
   ) as AdvertisementContextType;
+  const { closeModalCreate, showModalCreate, openModalSucess } = useContext(
+    ModalContext
+  ) as ModalContextType;
 
   // Setando os estados
-  const history = useHistory();
-  const handleClose = () => setModalShow(false);
   const [typeAd, setTypeAd] = useState<string>("sale");
   const [vehicleType, setVehicleType] = useState<string>("car");
   const [amountImage, setAmountImages] = useState<number[]>([1]);
-  const [modalSucessShow, setModalSucessShow] = useState<boolean>(false);
 
   // Funções que mudam os estados
   const salesAd = () => setTypeAd("sale");
@@ -49,7 +44,6 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
   const vehicleTypeMotorcycle = () => setVehicleType("motorcycle");
   const addMoreImage = () =>
     setAmountImages([...amountImage, amountImage.length + 1]);
-  const openModalSucess = () => setModalSucessShow(true);
 
   //Schema para o form
   const schema = yup.object().shape({
@@ -87,25 +81,17 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
 
     reset();
 
-    await createAdvertisement(
-      "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpYXQiOjE2NjAyNjc0NzEsImV4cCI6MTY2MDUyNjY3MSwic3ViIjoiYmNmODdjMTUtMWM4YS00OTFhLWJlOGItZDEwOTEyM2ZmOTY1In0.dmpl7AOLduQxb7dmL6TJTrTJAxFEd1XGQD-L1uDiROE",
-      data
-    ).then(() => {
-      handleClose();
+    const token = localStorage.getItem("@motorsshop:token") || '""';
+    await createAdvertisement(token, data).then(() => {
+      closeModalCreate();
       openModalSucess();
-      return;
     });
   };
 
   return (
     <Container>
-      <ModalSucess
-        modalShow={modalSucessShow}
-        setModalShow={setModalSucessShow}
-      >
-        Seu anúncio foi criado com sucesso!
-      </ModalSucess>
-      <Modal show={modalShow} onHide={handleClose}>
+      <ModalSucess>Seu anúncio foi criado com sucesso!</ModalSucess>
+      <Modal show={showModalCreate} onHide={closeModalCreate}>
         <Modal.Header closeButton>
           <ModalTitle>Criar anúncio</ModalTitle>
         </Modal.Header>
@@ -230,7 +216,11 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
             </ImagesRegisterContainer>
           </Modal.Body>
           <Modal.Footer style={{ justifyContent: "flex-end" }}>
-            <Button onClick={handleClose} typeButton="negative" typeFont="big">
+            <Button
+              onClick={closeModalCreate}
+              typeButton="negative"
+              typeFont="big"
+            >
               Cancelar
             </Button>
             {Object.keys(errors).length ? (

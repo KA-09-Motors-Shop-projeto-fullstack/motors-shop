@@ -1,7 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import { ModalContextType } from "../../@types/modals";
 import Avatar from "../../components/Avatar";
 import Button from "../../components/Button";
 import ModalCreate from "../../components/ModalCreate";
+import { ModalContext } from "../../providers/Modals";
 import {
   ContainerInformations,
   NameUser,
@@ -9,19 +11,14 @@ import {
   Rectangle,
   White,
   Roxo,
-  NameContainer
+  NameContainer,
 } from "./styles";
 
 const Profile: React.FC = () => {
-  const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
-  const showModal = () => setShowModalCreate(true);
-
+  const { openModalCreate } = useContext(ModalContext) as ModalContextType;
   return (
     <main>
-      <ModalCreate
-        modalShow={showModalCreate}
-        setModalShow={setShowModalCreate}
-      />
+      <ModalCreate />
       <Rectangle>
         <Roxo></Roxo>
         <White></White>
@@ -45,7 +42,11 @@ const Profile: React.FC = () => {
           industry. Lorem Ipsum has been the industry's standard dummy text ever
           since the 1500s
         </DescriptionUser>
-        <Button onClick={showModal} typeButton="outlineBrand1" typeFont="big">
+        <Button
+          onClick={openModalCreate}
+          typeButton="outlineBrand1"
+          typeFont="big"
+        >
           Criar anúncio
         </Button>
       </ContainerInformations>

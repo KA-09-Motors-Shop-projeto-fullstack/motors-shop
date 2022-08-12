@@ -1,28 +1,21 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Modal } from "react-bootstrap";
 import { Container, ModalTitle, ParagraphOne, ParagraphTwo } from "./styles";
-import Button from "../Button";
-import { useHistory } from "react-router-dom";
+import { ModalContext } from "../../providers/Modals";
+import { ModalContextType } from "../../@types/modals";
 
 interface IPropsModalSucess {
-  modalShow: boolean;
-  setModalShow: React.Dispatch<React.SetStateAction<boolean>>;
   children: React.ReactNode;
   footer?: React.ReactNode;
 }
 
-const ModalSucess: React.FC<IPropsModalSucess> = ({
-  modalShow,
-  setModalShow,
-  children,
-  footer,
-}) => {
-  const history = useHistory();
-  const handleClose = () => setModalShow(false);
-
+const ModalSucess: React.FC<IPropsModalSucess> = ({ children, footer }) => {
+  const { showModalSucess, closeModalSucess } = useContext(
+    ModalContext
+  ) as ModalContextType;
   return (
     <Container>
-      <Modal show={modalShow} onHide={handleClose}>
+      <Modal show={showModalSucess} onHide={closeModalSucess}>
         <Modal.Header closeButton>
           <ModalTitle>Sucesso!</ModalTitle>
         </Modal.Header>
