@@ -6,15 +6,18 @@ import App from "./App";
 import GlobalStyled from "./styles/global";
 import theme from "./styles/theme";
 import "bootstrap/dist/css/bootstrap.min.css";
+import Providers from "./providers";
 
 const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
 root.render(
-  <BrowserRouter>
-    <ThemeProvider theme={theme}>
-      <GlobalStyled />
-      <App />
-    </ThemeProvider>
-  </BrowserRouter>
+  <Providers>
+    <BrowserRouter>
+      <ThemeProvider theme={theme}>
+        <GlobalStyled />
+        <App />
+      </ThemeProvider>
+    </BrowserRouter>
+  </Providers>
 );

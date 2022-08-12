@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Modal } from "react-bootstrap";
 import {
   Container,
@@ -15,49 +15,44 @@ import Button from "../Button";
 import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import * as yup from "yup";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { AdvertisementContext } from "../../providers/Advertisements";
+import { AdvertisementContextType } from "../../@types/advertisements";
+import ModalSucess from "../ModalSucess";
+import { ModalContext } from "../../providers/Modals";
+import { ModalContextType } from "../../@types/modals";
 
-interface IPropsModalCreate {
-  modalShow: boolean;
-  setModalShow: React.Dispatch<React.SetStateAction<boolean>>;
-}
+const ModalCreate: React.FC = () => {
+  // Chamando o provider
+  const { createAdvertisement } = useContext(
+    AdvertisementContext
+  ) as AdvertisementContextType;
+  const { closeModalCreate, showModalCreate, openModalSucess } = useContext(
+    ModalContext
+  ) as ModalContextType;
 
-type Inputs = {
-  title: string;
-  year: string;
-  km: string;
-  price: string;
-  description: string;
-  coverImage: string;
-};
-
-const ModalCreate: React.FC<IPropsModalCreate> = ({
-  modalShow,
-  setModalShow,
-}) => {
-  const history = useHistory();
-  const handleClose = () => setModalShow(false);
-  const goLogin = () => history.push("/login");
+  // Setando os estados
   const [typeAd, setTypeAd] = useState<string>("sale");
   const [vehicleType, setVehicleType] = useState<string>("car");
   const [amountImage, setAmountImages] = useState<number[]>([1]);
 
+  // Funções que mudam os estados
   const salesAd = () => setTypeAd("sale");
   const aucionAd = () => setTypeAd("auction");
-
   const vehicleTypeCar = () => setVehicleType("car");
   const vehicleTypeMotorcycle = () => setVehicleType("motorcycle");
   const addMoreImage = () =>
     setAmountImages([...amountImage, amountImage.length + 1]);
 
+  //Schema para o form
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     year: yup.string().required("Campo obrigatório"),
     km: yup.number().required("Campo obrigatório"),
     price: yup.string().required("Campo obrigatório"),
     description: yup.string().required("Campo obrigatório"),
-    coverImage: yup.string().required("Campo obrigatório"),
+    cover_image: yup.string().required("Campo obrigatório"),
     image1: yup.string().required("Campo obrigatório"),
   });
 
@@ -65,24 +60,38 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
     register,
     formState: { errors },
     handleSubmit,
+    reset,
   } = useForm({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: any) => {
+  // Post na API
+  const onSubmit = async (data: any) => {
     let images: string[] = [];
     amountImage.forEach((element) => {
       images.push(data[`image${element}`]);
       delete data[`image${element}`];
     });
     data.images = images;
-    console.log({ ...data, typeAd, vehicleType });
+    data = {
+      ...data,
+      type_ad: typeAd,
+      vehicle_type: vehicleType,
+    };
+
+    reset();
+
+    const token = localStorage.getItem("@motorsshop:token") || '""';
+    await createAdvertisement(token, data).then(() => {
+      closeModalCreate();
+      openModalSucess();
+    });
   };
-  console.log(errors);
 
   return (
     <Container>
-      <Modal show={modalShow} onHide={handleClose}>
+      <ModalSucess>Seu anúncio foi criado com sucesso!</ModalSucess>
+      <Modal show={showModalCreate} onHide={closeModalCreate}>
         <Modal.Header closeButton>
           <ModalTitle>Criar anúncio</ModalTitle>
         </Modal.Header>
@@ -121,7 +130,7 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
               </TitleContainer>
               <ContainerSpecifications>
                 <Input
-                  type="text"
+                  type="number"
                   label="Ano"
                   name="year"
                   placeholder="Digitar ano"
@@ -180,9 +189,9 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
                 placeholder="Inserir URL da imagem"
                 type="text"
                 label="Inserir URL da imagem"
-                name="coverImage"
+                name="cover_image"
                 register={register}
-                error={!!errors.coverImage?.message}
+                error={!!errors.cover_image?.message}
               />
               {amountImage.map((element) => {
                 return (
@@ -207,7 +216,11 @@ const ModalCreate: React.FC<IPropsModalCreate> = ({
             </ImagesRegisterContainer>
           </Modal.Body>
           <Modal.Footer style={{ justifyContent: "flex-end" }}>
-            <Button typeButton="negative" typeFont="big">
+            <Button
+              onClick={closeModalCreate}
+              typeButton="negative"
+              typeFont="big"
+            >
               Cancelar
             </Button>
             {Object.keys(errors).length ? (
