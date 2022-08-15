@@ -2,7 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 312px;
-  height: 350px;
+  /* height: 350px; */
   :hover {
     figure {
       outline: ${(props) => props.theme.colors.brand1} 2px solid;
@@ -21,11 +21,13 @@ export const Title = styled.h3`
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  margin-bottom: 16px;
 `;
 
 export const Description = styled.p`
   font: ${(props) => props.theme.fonts["body-2-400"]};
   color: ${(props) => props.theme.colors.grey2};
+  line-height: 24px;
 `;
 
 export const Figure = styled.figure`
@@ -34,6 +36,12 @@ export const Figure = styled.figure`
   display: flex;
   justify-content: center;
   align-items: center;
+  margin-bottom: 16px;
+
+  img {
+    width: 312px;
+    height: 152px;
+  }
 `;
 
 export const Avatar = styled.div`
@@ -56,6 +64,7 @@ export const Advertiser = styled.div`
   }
   display: flex;
   align-items: center;
+  margin-bottom: 16px;
 `;
 
 export const ContainerTags = styled.div`
@@ -71,7 +80,7 @@ export const CardFooter = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  width: 90%;
+  width: 100%;
 `;
 
 export const Price = styled.span`

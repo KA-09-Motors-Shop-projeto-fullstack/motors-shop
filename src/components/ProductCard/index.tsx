@@ -10,18 +10,8 @@ import {
   Price,
   Title,
 } from "./styles";
-import image from "../../assets/EXTERIOR-frontSidePilotNear-1653845164710-removebg-preview 1.png";
 import Button from "../Button";
-
-interface IPropsProductCard {
-  carTitle: string;
-  carDescription: string;
-  carPrice: string;
-  carKm: string;
-  carYear: number;
-  carImage: string;
-  carAdvertiser: string;
-}
+import { IPropsProductCard } from "./types"
 
 const ProductCard: React.FC<IPropsProductCard> = ({
   carDescription,
@@ -32,16 +22,30 @@ const ProductCard: React.FC<IPropsProductCard> = ({
   carImage,
   carAdvertiser,
 }) => {
+  const MAX_DESCRIPTION_LENGTH = 80
+
+  const formatedPrice = Number(carPrice).toLocaleString("pt-br", {
+    style: "currency", 
+    currency: "BRL", 
+    minimumFractionDigits: 2,
+    maximumFractionDigits: 2
+  })
+  const formatedDescription = carDescription.length > MAX_DESCRIPTION_LENGTH ?
+    carDescription.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "..." :
+    carDescription;
+
   return (
     <Container>
       <Figure>
         <img src={carImage} alt={carTitle} />
       </Figure>
+
       <Title>{carTitle}</Title>
-      <Description>{carDescription}</Description>
+      <Description>{formatedDescription}</Description>
+
       <Advertiser>
         <Avatar>{carAdvertiser[0]}</Avatar>
-        <span>carAdvertiser</span>
+        <span>{carAdvertiser}</span>
       </Advertiser>
       <CardFooter>
         <ContainerTags>
@@ -52,7 +56,7 @@ const ProductCard: React.FC<IPropsProductCard> = ({
             {carYear}
           </Button>
         </ContainerTags>
-        <Price>R$ {carPrice},00</Price>
+        <Price>{formatedPrice}</Price>
       </CardFooter>
     </Container>
   );
