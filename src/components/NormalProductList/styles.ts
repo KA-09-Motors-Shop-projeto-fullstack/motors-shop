@@ -16,8 +16,6 @@ export const Container = styled.div`
     gap: 30px;
     overflow: auto;
     margin: 0;
-    padding: 0;
-    padding-bottom: 15px;
-    padding-left: 20px;
+    padding: 0 20px;
   }
 `;
