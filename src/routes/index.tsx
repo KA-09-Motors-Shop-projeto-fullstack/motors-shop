@@ -7,15 +7,14 @@ import Login from "../components/Login";
 import ModalCreate from "../components/ModalCreate";
 import PrivateRoute from "../components/PrivateRoute";
 import ProductCard from "../components/ProductCard";
+import LoginPage from "../pages/Login";
 import Profile from "../pages/Profile";
 
 const Routes: React.FC = () => {
   return (
     <Switch>
       <Route exact path="/">
-        <Header />
-        <Login />
-        <Footer />
+        <LoginPage />
       </Route>
       <PrivateRoute path="/profile">
         <Profile />

@@ -28,8 +28,8 @@ const Login: React.FC = () => {
 
   return (
     <Container>
-      <h2>Login</h2>
       <Form onSubmit={handleSubmit(onSubmit)}>
+        <h2>Login</h2>
         <Input
           register={register}
           label="Email"
@@ -49,7 +49,7 @@ const Login: React.FC = () => {
         <Button type="submit" typeButton="brand1" typeFont="big">
           Entrar
         </Button>
-        <span>Ainda não possui uma conta?</span>
+        <span>Ainda não possui conta?</span>
         <Button typeButton="outline2" typeFont="big">
           Cadastrar
         </Button>
