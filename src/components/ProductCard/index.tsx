@@ -22,7 +22,7 @@ const ProductCard: React.FC<IPropsProductCard> = ({
   carImage,
   carAdvertiser,
 }) => {
-  const MAX_DESCRIPTION_LENGTH = 80
+  const MAX_DESCRIPTION_LENGTH = 75
 
   const formatedPrice = Number(carPrice).toLocaleString("pt-br", {
     style: "currency", 
