@@ -7,13 +7,9 @@ export const InfoNavContainer = styled.section`
   justify-content: center;
   align-items: center;
   gap: 20px;
-
   width: 100%;
-  height: 30vh;
   min-height: fit-content;
-
-  padding: 0 25%;
-
+  padding: 5% 25%;
   background-color: ${theme.colors.brand2};
   color: white;
   
@@ -28,7 +24,6 @@ export const InfoNavContainer = styled.section`
     
     p {
       margin-top: 20px;
-
       font-weight: 400;
       font-size: 1rem;
     }
@@ -37,9 +32,7 @@ export const InfoNavContainer = styled.section`
   nav {
     display: flex;
     justify-content: center;
-
     gap: 20px;
-
     width: 80%;
 
     button {

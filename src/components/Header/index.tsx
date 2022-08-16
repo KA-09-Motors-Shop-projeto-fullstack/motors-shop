@@ -70,7 +70,7 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
             ) : (
               <>
                 <li>
-                  <Link to="/login">Fazer login</Link>
+                  <Link to="/login">Entrar</Link>
                 </li>
                 <li>
                   <Button typeFont="big" typeButton="outline2">

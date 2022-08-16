@@ -2,7 +2,6 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   width: 312px;
-  /* height: 350px; */
   :hover {
     figure {
       outline: ${(props) => props.theme.colors.brand1} 2px solid;
@@ -11,6 +10,7 @@ export const Container = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
+  padding: 4px 0;
 `;
 
 export const Title = styled.h3`
@@ -41,6 +41,7 @@ export const Figure = styled.figure`
   img {
     width: 312px;
     height: 152px;
+    overflow: hidden;
   }
 `;
 

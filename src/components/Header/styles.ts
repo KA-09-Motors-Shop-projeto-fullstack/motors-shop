@@ -13,6 +13,7 @@ export const HeaderStyle = styled.header`
 
 export const Ul = styled.ul`
   display: flex;
+  gap: 10px;
   justify-content: space-around;
   width: 40vw;
   align-items: center;
