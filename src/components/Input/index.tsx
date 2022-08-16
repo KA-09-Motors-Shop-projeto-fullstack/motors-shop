@@ -7,14 +7,14 @@ export interface IPropsInput {
   label: string;
   name: string;
   placeholder: string;
-  type: string;
+  type?: string;
   error?: boolean;
 }
 
 const Input: React.FC<IPropsInput> = ({
   label,
   name,
-  type,
+  type = "text",
   children,
   register,
   placeholder,
