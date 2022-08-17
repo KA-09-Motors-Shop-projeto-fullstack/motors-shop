@@ -3,7 +3,7 @@ import { Container, InputStyle, Label } from "./styles";
 
 export interface IPropsInput {
   children?: ReactNode;
-  register?: any;
+  register: any;
   label: string;
   name: string;
   placeholder: string;

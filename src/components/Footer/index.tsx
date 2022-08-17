@@ -5,13 +5,13 @@ import { FaAngleUp } from "react-icons/fa";
 import { animateScroll } from "react-scroll";
 
 const Footer: React.FC = () => {
-  const scrollToTop = animateScroll.scrollToTop();
+  const scrollToTop = animateScroll.scrollToTop;
 
   return (
     <FooterStyle>
       <img src={Logo} alt="Motors Shop" />
       <Span>© 2022 - Todos os direitos reservados.</Span>
-      <Box onClick={() => animateScroll.scrollToTop()}>
+      <Box onClick={() => scrollToTop()}>
         <FaAngleUp />
       </Box>
     </FooterStyle>
