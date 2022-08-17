@@ -6,6 +6,7 @@ import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import ModalCreate from "../../components/ModalCreate";
 import { ModalContext } from "../../providers/Modals";
+import { getUserLocalStorage } from "../../services/auth";
 import {
   ContainerInformations,
   NameUser,
@@ -18,6 +19,7 @@ import {
 
 const Profile: React.FC = () => {
   const { openModalCreate } = useContext(ModalContext) as ModalContextType;
+  const user = getUserLocalStorage();
   return (
     <>
       <Header />
@@ -28,23 +30,14 @@ const Profile: React.FC = () => {
           <White></White>
         </Rectangle>
         <ContainerInformations>
-          <Avatar
-            fontSize={36}
-            size={104}
-            color="random1"
-            name="Omar Colombari"
-          />
+          <Avatar fontSize={36} size={104} color="random1" name={user.name} />
           <NameContainer>
-            <NameUser>Samuel Leão</NameUser>
+            <NameUser>{user.name}</NameUser>
             <Button typeButton="brandOpacity" typeFont="medium">
-              Anunciante
+              {user.is_seller && "Anunciante"}
             </Button>
           </NameContainer>
-          <DescriptionUser>
-            Lorem Ipsum is simply dummy text of the printing and typesetting
-            industry. Lorem Ipsum has been the industry's standard dummy text
-            ever since the 1500s
-          </DescriptionUser>
+          <DescriptionUser>{user.description}</DescriptionUser>
           <Button
             onClick={openModalCreate}
             typeButton="outlineBrand1"

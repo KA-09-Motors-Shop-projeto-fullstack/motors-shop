@@ -9,10 +9,19 @@ export interface IPropsAvatar {
 }
 
 const Avatar: React.FC<IPropsAvatar> = ({ color, name, fontSize, size }) => {
-  let avatarName: string | string[] = name.split(" ");
-  avatarName = `${avatarName[0][0]}${
-    avatarName[avatarName.length - 1][0]
-  }`.toUpperCase();
+  const createAvatarName = (firstName: string, lastName: string = "") => {
+    return lastName[0]
+      ? `${firstName[0]}${lastName[0]}`.toUpperCase()
+      : firstName[0].toUpperCase();
+  };
+
+  const [firstName] = name.split(" ");
+  const lastName = name.split(" ").pop();
+  const avatarName =
+    lastName !== firstName
+      ? createAvatarName(firstName, lastName)
+      : createAvatarName(firstName);
+
   return (
     <Container size={size} fontSize={fontSize} color={color}>
       {avatarName}
