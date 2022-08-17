@@ -1,6 +1,7 @@
 import React from "react";
 import { AdvertisementProvider } from "./Advertisements";
 import { ModalProvider } from "./Modals";
+import { UserProvider } from "./Users";
 
 interface IProps {
   children: React.ReactNode;
@@ -9,7 +10,9 @@ interface IProps {
 const Providers: React.FC<IProps> = ({ children }) => {
   return (
     <ModalProvider>
-      <AdvertisementProvider>{children}</AdvertisementProvider>
+      <AdvertisementProvider>
+        <UserProvider>{children}</UserProvider>
+      </AdvertisementProvider>
     </ModalProvider>
   );
 };

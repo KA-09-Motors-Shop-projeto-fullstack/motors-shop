@@ -5,8 +5,11 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container, Form } from "./styles";
+import { useHistory } from "react-router-dom";
 
 const Login: React.FC = () => {
+  const history = useHistory();
+
   //Schema para o form
   const schema = yup.object().shape({
     email: yup.string().email("Email inválido").required("Email obrigatório"),
@@ -21,6 +24,8 @@ const Login: React.FC = () => {
   } = useForm({
     resolver: yupResolver(schema),
   });
+
+  const goSignup = () => history.push("/signup");
 
   const onSubmit = () => {
     reset();
@@ -50,7 +55,7 @@ const Login: React.FC = () => {
           Entrar
         </Button>
         <span>Ainda não possui conta?</span>
-        <Button typeButton="outline2" typeFont="big">
+        <Button onClick={goSignup} typeButton="outline2" typeFont="big">
           Cadastrar
         </Button>
       </Form>
