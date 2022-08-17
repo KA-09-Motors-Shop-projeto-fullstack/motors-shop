@@ -1,5 +1,4 @@
 import React, { createContext, useState } from "react";
-import { ModalContextType } from "../../@types/modals";
 import {
   ICreateUser,
   ILoginUser,
@@ -8,6 +7,11 @@ import {
   UserContextType,
 } from "../../@types/users";
 import api from "../../services/api";
+import {
+  getUserLocalStorage,
+  isAuthenticated,
+  login,
+} from "../../services/auth";
 
 interface IProps {
   children?: React.ReactNode;
@@ -16,13 +20,18 @@ interface IProps {
 export const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider: React.FC<IProps> = ({ children }) => {
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<IUser | {}>(
+    isAuthenticated() ? getUserLocalStorage() : {}
+  );
 
   const loginUser = async (data: ILoginUser) => {
     const { data: res } = await api.post<ILoginUserResponse>(
       "/users/login",
       data
     );
+
+    setUser(res.user);
+    login(res);
 
     return res;
   };

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Button from "../Button";
 import Input from "../Input";
 import * as yup from "yup";
@@ -6,9 +6,12 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container, Form } from "./styles";
 import { useHistory } from "react-router-dom";
+import { UserContext } from "../../providers/Users";
+import { UserContextType } from "../../@types/users";
 
 const Login: React.FC = () => {
   const history = useHistory();
+  const { loginUser } = useContext(UserContext) as UserContextType;
 
   //Schema para o form
   const schema = yup.object().shape({
