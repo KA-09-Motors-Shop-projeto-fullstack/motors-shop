@@ -20,7 +20,7 @@ export interface IPropsButton {
     | "sucess"
     | "brandDisable";
   children?: ReactNode;
-  onClick?: React.MouseEventHandler<HTMLButtonElement>;
+  onClick?: () => void;
   type?: "button" | "reset" | "submit";
 }
 

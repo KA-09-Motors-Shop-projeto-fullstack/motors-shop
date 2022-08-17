@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { HeaderStyle, Ul, Container, Line, ContainerLogged } from "./styles";
 import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
-import { NavLink } from "react-router-dom";
+import { NavLink, useHistory } from "react-router-dom";
 import Button from "../Button";
 import { isAuthenticated } from "../../services/auth";
 import Avatar from "../Avatar";
@@ -12,6 +12,9 @@ interface IPropsHeader {
 }
 
 const Header: React.FC<IPropsHeader> = ({ children }) => {
+  const history = useHistory();
+  const goSignup = () => history.push("/signup");
+
   return (
     <HeaderStyle>
       <Container>
@@ -73,7 +76,11 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
                   </NavLink>
                 </li>
                 <li>
-                  <Button typeFont="big" typeButton="outline2">
+                  <Button
+                    onClick={goSignup}
+                    typeFont="big"
+                    typeButton="outline2"
+                  >
                     Cadastrar
                   </Button>
                 </li>
