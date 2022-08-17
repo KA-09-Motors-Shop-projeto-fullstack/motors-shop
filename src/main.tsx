@@ -12,12 +12,12 @@ const container = document.getElementById("root") as HTMLElement;
 const root = createRoot(container);
 
 root.render(
-  <Providers>
-    <BrowserRouter>
+  <BrowserRouter>
+    <Providers>
       <ThemeProvider theme={theme}>
         <GlobalStyled />
         <App />
       </ThemeProvider>
-    </BrowserRouter>
-  </Providers>
+    </Providers>
+  </BrowserRouter>
 );

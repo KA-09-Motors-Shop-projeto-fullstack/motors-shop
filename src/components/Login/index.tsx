@@ -5,9 +5,9 @@ import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { Container, Form } from "./styles";
-import { useHistory } from "react-router-dom";
+import { Redirect, useHistory } from "react-router-dom";
 import { UserContext } from "../../providers/Users";
-import { UserContextType } from "../../@types/users";
+import { ILoginUser, UserContextType } from "../../@types/users";
 
 const Login: React.FC = () => {
   const history = useHistory();
@@ -30,8 +30,9 @@ const Login: React.FC = () => {
 
   const goSignup = () => history.push("/signup");
 
-  const onSubmit = () => {
+  const onSubmit = async (data: any) => {
     reset();
+    await loginUser(data);
   };
 
   return (

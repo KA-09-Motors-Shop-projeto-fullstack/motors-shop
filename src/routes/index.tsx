@@ -13,7 +13,7 @@ import Profile from "../pages/Profile";
 const Routes: React.FC = () => {
   return (
     <Switch>
-      <Route exact path="/">
+      <Route exact path="/login">
         <LoginPage />
       </Route>
       <PrivateRoute path="/profile">

@@ -42,5 +42,5 @@ export interface ILoginUserResponse {
 export type UserContextType = {
   user: IUser | {};
   signupUser: (data: ICreateUser) => Promise<void>;
-  loginUser: (data: ILoginUser) => Promise<ILoginUserResponse>;
+  loginUser: (data: ILoginUser) => Promise<void>;
 };

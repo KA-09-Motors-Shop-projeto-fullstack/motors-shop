@@ -22,7 +22,7 @@ import { AdvertisementContextType } from "../../@types/advertisements";
 import ModalSucess from "../ModalSucess";
 import { ModalContext } from "../../providers/Modals";
 import { ModalContextType } from "../../@types/modals";
-import { getToken } from "../../services/auth";
+import { getTokenLocalStorage } from "../../services/auth";
 
 const ModalCreate: React.FC = () => {
   // Chamando o provider
@@ -82,7 +82,7 @@ const ModalCreate: React.FC = () => {
 
     reset();
 
-    const token = getToken();
+    const token = getTokenLocalStorage();
     await createAdvertisement(token, data).then(() => {
       closeModalCreate();
       openModalSucess();
