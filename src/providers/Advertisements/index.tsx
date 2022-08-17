@@ -52,17 +52,17 @@ export const AdvertisementProvider: React.FC<IProps> = ({ children }) => {
 
   const createAdvertisement = async (
     token: string,
-    dataAdvertisement: ICreateAdvertisement
+    data: ICreateAdvertisement
   ) => {
-    const { data } = await api.post<IAdversiment>(
+    const { data: res } = await api.post<IAdversiment>(
       "/advertisements",
-      dataAdvertisement,
+      data,
       {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       }
-    )
+    );
   };
 
   return (

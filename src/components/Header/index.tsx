@@ -2,7 +2,7 @@ import React, { ReactNode } from "react";
 import { HeaderStyle, Ul, Container, Line, ContainerLogged } from "./styles";
 import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 import Button from "../Button";
 import { isAuthenticated } from "../../services/auth";
 import Avatar from "../Avatar";
@@ -54,9 +54,7 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
                 Leilão
               </LinkScroll>
             </li>
-            <li>
-              <Line />
-            </li>
+            <Line />
             {isAuthenticated() ? (
               <ContainerLogged>
                 <Avatar
@@ -70,7 +68,9 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
             ) : (
               <>
                 <li>
-                  <Link to="/login">Fazer login</Link>
+                  <NavLink activeStyle={{ color: "#4529E6" }} to="/login">
+                    Fazer login
+                  </NavLink>
                 </li>
                 <li>
                   <Button typeFont="big" typeButton="outline2">

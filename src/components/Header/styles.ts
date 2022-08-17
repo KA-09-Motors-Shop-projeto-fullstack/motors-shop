@@ -3,6 +3,7 @@ import styled from "styled-components";
 export const HeaderStyle = styled.header`
   display: flex;
   justify-content: center;
+  border-bottom: 2px solid ${(props) => props.theme.colors.grey6};
   a {
     font: ${(props) => props.theme.fonts["body-1-600"]};
     color: ${(props) => props.theme.colors.grey2};
