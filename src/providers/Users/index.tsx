@@ -1,7 +1,9 @@
 import { AxiosError } from "axios";
-import React, { createContext, useState } from "react";
+import React, { createContext, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { animateScroll } from "react-scroll";
 import { toast } from "react-toastify";
+import { ModalContextType } from "../../@types/modals";
 import {
   ICreateUser,
   ILoginUser,
@@ -15,6 +17,7 @@ import {
   isAuthenticated,
   login,
 } from "../../services/auth";
+import { ModalContext } from "../Modals";
 
 interface IProps {
   children?: React.ReactNode;
@@ -27,6 +30,7 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
   const [user, setUser] = useState<IUser | {}>(
     isAuthenticated() ? getUserLocalStorage() : {}
   );
+  const { openModalSucess } = useContext(ModalContext) as ModalContextType;
 
   const loginUser = async (data: ILoginUser) => {
     await api
@@ -45,7 +49,19 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
   };
 
   const signupUser = async (data: ICreateUser) => {
-    const { data: res } = await api.post<IUser>("/users/register", data);
+    await api
+      .post<IUser>("/users/register", data)
+      .then(() => {
+        animateScroll.scrollToTop();
+        openModalSucess();
+      })
+      .catch(({ response }: AxiosError) => {
+        if (response?.status == 409) {
+          return toast.error("Email e/ou CPF já registrado");
+        }
+
+        return toast.error("Ops! Algo deu errado");
+      });
     return;
   };
 

@@ -76,10 +76,7 @@ const SignupPage: React.FC = () => {
     data.birth_date = `${year}-${month}-${day}`;
     data.is_seller = isSeller;
 
-    await signupUser(data).then(() => {
-      animateScroll.scrollToTop();
-      openModalSucess();
-    });
+    await signupUser(data);
   };
 
   const goLogin = () => {
