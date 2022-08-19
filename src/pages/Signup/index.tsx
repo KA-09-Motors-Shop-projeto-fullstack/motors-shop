@@ -73,63 +73,63 @@ const SignupPage: React.FC = () => {
                 name="description"
                 register={register}
               />
-              <AddressInformation>
-                <Input
-                  label="CEP"
-                  placeholder="00000.000"
-                  name="cep"
-                  register={register}
-                />
-                <div>
-                  <Input
-                    label="Estado"
-                    placeholder="Digitar estado"
-                    name="state"
-                    register={register}
-                  />
-                  <Input
-                    label="Cidade"
-                    placeholder="Digitar cidade"
-                    name="city"
-                    register={register}
-                  />
-                </div>
-                <Input
-                  label="Rua"
-                  placeholder="Digitar rua"
-                  name="street"
-                  register={register}
-                />
-                <div>
-                  <Input
-                    label="Número"
-                    placeholder="Digitar número"
-                    name="number"
-                    register={register}
-                  />
-                  <Input
-                    label="Complemento"
-                    placeholder="Ex: apart 307"
-                    name="complement"
-                    register={register}
-                  />
-                </div>
-              </AddressInformation>
-              <TypeAccount>
-                <Button
-                  typeButton={!isSeller ? "brand1" : "outline2"}
-                  typeFont="big"
-                  children="Comprador"
-                  onClick={typeAccountBuyer}
-                />
-                <Button
-                  typeButton={isSeller ? "brand1" : "outline2"}
-                  typeFont="big"
-                  children="Anunciante"
-                  onClick={typeAccountSeller}
-                />
-              </TypeAccount>
             </PersonalInformation>
+            <AddressInformation>
+              <Input
+                label="CEP"
+                placeholder="00000.000"
+                name="cep"
+                register={register}
+              />
+              <div>
+                <Input
+                  label="Estado"
+                  placeholder="Digitar estado"
+                  name="state"
+                  register={register}
+                />
+                <Input
+                  label="Cidade"
+                  placeholder="Digitar cidade"
+                  name="city"
+                  register={register}
+                />
+              </div>
+              <Input
+                label="Rua"
+                placeholder="Digitar rua"
+                name="street"
+                register={register}
+              />
+              <div>
+                <Input
+                  label="Número"
+                  placeholder="Digitar número"
+                  name="number"
+                  register={register}
+                />
+                <Input
+                  label="Complemento"
+                  placeholder="Ex: apart 307"
+                  name="complement"
+                  register={register}
+                />
+              </div>
+            </AddressInformation>
+            <TypeAccount>
+              <Button
+                typeButton={!isSeller ? "brand1" : "outline2"}
+                typeFont="big"
+                children="Comprador"
+                onClick={typeAccountBuyer}
+              />
+              <Button
+                typeButton={isSeller ? "brand1" : "outline2"}
+                typeFont="big"
+                children="Anunciante"
+                onClick={typeAccountSeller}
+              />
+            </TypeAccount>
             <Input
               label="Senha"
               placeholder="Digitar senha"
@@ -141,11 +141,13 @@ const SignupPage: React.FC = () => {
               placeholder="Digitar senha"
               name="confirmPassword"
               register={register}
+              className="teste"
             />
             <Button
               typeButton="brand1"
               typeFont="big"
               children="Finalizar cadastro"
+              className="confirmButton"
             />
           </Form>
         </Container>

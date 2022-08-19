@@ -1,13 +1,9 @@
-import React, { ReactNode } from "react";
+import React, { InputHTMLAttributes } from "react";
 import { Container, InputStyle, Label } from "./styles";
 
-export interface IPropsInput {
-  children?: ReactNode;
+export interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
   register: any;
   label: string;
-  name: string;
-  placeholder: string;
-  type?: string;
   error?: boolean;
 }
 
@@ -15,15 +11,16 @@ const Input: React.FC<IPropsInput> = ({
   label,
   name,
   type = "text",
-  children,
   register,
   placeholder,
   error,
+  ...rest
 }) => {
   return (
     <Container>
       <Label>{label}</Label>
       <InputStyle
+        {...rest}
         {...register(name)}
         type={type}
         name={name}
