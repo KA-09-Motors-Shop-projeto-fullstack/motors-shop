@@ -1,5 +1,7 @@
+import { AxiosError } from "axios";
 import React, { createContext, useState } from "react";
 import { useHistory } from "react-router-dom";
+import { toast } from "react-toastify";
 import {
   ICreateUser,
   ILoginUser,
@@ -33,6 +35,12 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
         setUser(res.user);
         login(res);
         return history.push("/profile");
+      })
+      .catch(({ response }: AxiosError) => {
+        if (response?.status == 400) {
+          return toast.error("Email e/ou senha inválidos!");
+        }
+        return toast.error("Ops! Algo deu errado");
       });
   };
 
