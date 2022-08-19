@@ -9,6 +9,7 @@ import PrivateRoute from "../components/PrivateRoute";
 import ProductCard from "../components/ProductCard";
 import LoginPage from "../pages/Login";
 import Profile from "../pages/Profile";
+import SignupPage from "../pages/Signup";
 
 const Routes: React.FC = () => {
   return (
@@ -16,7 +17,10 @@ const Routes: React.FC = () => {
       <Route exact path="/login">
         <LoginPage />
       </Route>
-      <PrivateRoute path="/profile">
+      <Route exact path="/signup">
+        <SignupPage />
+      </Route>
+      <PrivateRoute exact path="/profile">
         <Profile />
       </PrivateRoute>
     </Switch>

@@ -1,7 +1,7 @@
-import React, { ReactNode } from "react";
+import React, { ButtonHTMLAttributes } from "react";
 import { ButtonStyled } from "./styles";
 
-export interface IPropsButton {
+export interface IPropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {
   typeFont: "big" | "medium";
   typeButton:
     | "default"
@@ -19,9 +19,6 @@ export interface IPropsButton {
     | "alert"
     | "sucess"
     | "brandDisable";
-  children?: ReactNode;
-  onClick?: () => void;
-  type?: "button" | "reset" | "submit";
 }
 
 const Button: React.FC<IPropsButton> = ({
@@ -30,9 +27,11 @@ const Button: React.FC<IPropsButton> = ({
   typeButton,
   onClick,
   type = "button",
+  ...rest
 }) => {
   return (
     <ButtonStyled
+      {...rest}
       type={type}
       onClick={onClick}
       typeButton={typeButton}
