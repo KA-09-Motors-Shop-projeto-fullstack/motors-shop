@@ -1,10 +1,12 @@
 import React, { InputHTMLAttributes } from "react";
 import { Container, InputStyle, Label } from "./styles";
+import InputMask from "react-input-mask";
 
 export interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
   register: any;
   label: string;
   error?: boolean;
+  mask?: string;
 }
 
 const Input: React.FC<IPropsInput> = ({
@@ -14,19 +16,30 @@ const Input: React.FC<IPropsInput> = ({
   register,
   placeholder,
   error,
+  mask,
   ...rest
 }) => {
   return (
-    <Container>
+    <Container error={error}>
       <Label>{label}</Label>
-      <InputStyle
-        {...rest}
-        {...register(name)}
-        type={type}
-        name={name}
-        placeholder={placeholder}
-        error={error}
-      />
+      {mask ? (
+        <InputMask
+          mask={mask}
+          {...rest}
+          {...register(name)}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+        ></InputMask>
+      ) : (
+        <InputStyle
+          {...rest}
+          {...register(name)}
+          type={type}
+          name={name}
+          placeholder={placeholder}
+        />
+      )}
     </Container>
   );
 };
