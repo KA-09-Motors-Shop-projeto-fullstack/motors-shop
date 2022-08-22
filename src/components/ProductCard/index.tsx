@@ -24,7 +24,7 @@ const ProductCard: React.FC<IPropsProductCard> = ({
 }) => {
   const MAX_DESCRIPTION_LENGTH = 75
 
-  const formatedPrice = Number(carPrice).toLocaleString("pt-br", {
+  const formatedPrice = (Number(carPrice) || 0 ).toLocaleString("pt-br", {
     style: "currency", 
     currency: "BRL", 
     minimumFractionDigits: 2,

@@ -3,27 +3,65 @@ import Header from "../../components/Header"
 import Button from "../../components/Button"
 import { InfoNavContainer, ListsContainer } from "./styles"
 import { NormalProductList } from "../../components/NormalProductList"
-import { faker } from '@faker-js/faker';
 import { IPropsProductCard } from "../../components/ProductCard/types"
+import { useEffect, useState } from "react"
+import api from "../../services/api"
+
+interface IAPIProduct {
+  cover_image: string
+  created_at: Date
+  id: string
+  images: Array<string>
+  km: number
+  price: number
+  title: string
+  type_ad: string
+  updated_at: string
+  user: {
+    name: string
+  }
+  vehicle_type: string
+  year: number
+  description: string
+}
 
 export const HomePage = () => {
-  function genFakeData(){
-    return {
-      carAdvertiser: faker.animal.cat(),
-      carDescription: faker.lorem.paragraph(),
-      carImage: faker.image.transport(),
-      carKm: Math.trunc(Math.random() * 10).toString(),
-      carPrice: (Math.random() * 100000).toFixed(2),
-      carTitle: faker.company.name(),
-      carYear: faker.date.past().getFullYear(),
+  const [ cars, setCars ] = useState<Array<IPropsProductCard>>([]); 
+  const [ bikes, setBikes ] = useState<Array<IPropsProductCard>>([]);
+
+  function filterByCarType(list: Array<IAPIProduct>, ...args: Array<string>){
+    const filtered: Array<IPropsProductCard> = []
+
+    for (const data of list){
+      for(const filter of args){
+        if(data.vehicle_type === filter){
+          filtered.push({
+            carAdvertiser: data.user.name,
+            carImage: data.cover_image,
+            carPrice: String(data.price),
+            carDescription: data.description,
+            carKm: String(data.km),
+            carTitle: data.title,
+            carYear: data.year
+          })
+        }
+      }
     }
+
+    return filtered
   }
 
-  const carsFakeData:Array<IPropsProductCard> = []
+  useEffect( () => {
+    ( async () => {
+      const apiData = (await api.get("/advertisements")).data as Array<IAPIProduct>
 
-  for(let i = 0; i < 20; i++){
-    carsFakeData.push(genFakeData())
-  }
+      const filteredCars = filterByCarType(apiData, "car", "carro")
+      const filteredBikes = filterByCarType(apiData, "moto", "bike", "motorcicle")
+
+      setCars(filteredCars)
+      setBikes(filteredBikes)
+    })()
+  }, [])
 
   return (
     <>
@@ -56,16 +94,27 @@ export const HomePage = () => {
             />
           </nav>
         </InfoNavContainer>
-        <ListsContainer>
-          <NormalProductList 
-            listTitle="Carros"
-            allData={carsFakeData}
-          />
 
-          <NormalProductList 
-            listTitle="Motos"
-            allData={carsFakeData}
-          />
+        <ListsContainer>
+          {
+            cars.length ? (
+              <NormalProductList
+                listTitle="Carros"
+                allData={cars}
+              />
+            ) : undefined
+          }
+
+          {
+            bikes.length ? (
+              <NormalProductList 
+                listTitle="Motos"
+                allData={bikes}
+              />
+            ) : undefined
+          }
+
+          
         </ListsContainer>
       </main>
 
