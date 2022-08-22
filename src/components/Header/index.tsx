@@ -72,7 +72,7 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
               <>
                 <li>
                   <NavLink activeStyle={{ color: "#4529E6" }} to="/login">
-                    Fazer login
+                    Entrar
                   </NavLink>
                 </li>
                 <li>
