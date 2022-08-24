@@ -22,6 +22,7 @@ import ModalSucess from "../../components/ModalSucess";
 import { ModalContext } from "../../providers/Modals";
 import { ModalContextType } from "../../@types/modals";
 import { animateScroll } from "react-scroll";
+import theme from "../../styles/theme";
 
 const SignupPage: React.FC = () => {
   const [isSeller, setIsSeller] = useState<boolean>(false);
@@ -69,6 +70,9 @@ const SignupPage: React.FC = () => {
   });
 
   const onSubmit = async (data: any) => {
+    const number = Math.round(Math.random() * (13 - 1) + 1);
+
+    data.avatarColor = (theme.colors as any)[`random${number}`];
     data.cpf = data.cpf.replace(/\D+/g, "");
     data.cep = data.cep.replace(/\D+/g, "");
     data.phone_number = data.phone_number.replace(/\D+/g, "");
