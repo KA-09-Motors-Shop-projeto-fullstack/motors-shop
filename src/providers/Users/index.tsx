@@ -27,7 +27,9 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider: React.FC<IProps> = ({ children }) => {
   const history = useHistory();
-  const [user, setUser] = useState<IUser>();
+  const [user, setUser] = useState<IUser | undefined>(
+    isAuthenticated() ? getUserLocalStorage() : undefined
+  );
   const { openModalSucess } = useContext(ModalContext) as ModalContextType;
 
   const loginUser = async (data: ILoginUser) => {
