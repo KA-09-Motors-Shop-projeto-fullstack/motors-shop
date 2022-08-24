@@ -8,19 +8,19 @@ import { useEffect, useState } from "react"
 import api from "../../services/api"
 
 interface IAPIProduct {
-  cover_image: string
+  coverImage: string
   created_at: Date
   id: string
   images: Array<string>
   km: number
   price: number
   title: string
-  type_ad: string
+  typeAd: string
   updated_at: string
   user: {
     name: string
   }
-  vehicle_type: string
+  vehicleType: string
   year: number
   description: string
 }
@@ -34,10 +34,10 @@ export const HomePage = () => {
 
     for (const data of list){
       for(const filter of args){
-        if(data.vehicle_type === filter){
+        if(data.vehicleType === filter){
           filtered.push({
             carAdvertiser: data.user.name,
-            carImage: data.cover_image,
+            carImage: data.coverImage,
             carPrice: String(data.price),
             carDescription: data.description,
             carKm: String(data.km),

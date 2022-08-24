@@ -39,8 +39,8 @@ const SignupPage: React.FC = () => {
     name: yup.string().required("Nome obrigatório"),
     email: yup.string().email("Email inválido").required("Email obrigatório"),
     cpf: yup.string().required("Cpf obrigatório"),
-    phone_number: yup.string().required("Número de celular obrigatório"),
-    birth_date: yup
+    phoneNumber: yup.string().required("Número de celular obrigatório"),
+    birthDate: yup
       .string()
       .required("Data de nascimento obrigatório")
       .matches(
@@ -75,10 +75,10 @@ const SignupPage: React.FC = () => {
     data.avatarColor = (theme.colors as any)[`random${number}`];
     data.cpf = data.cpf.replace(/\D+/g, "");
     data.cep = data.cep.replace(/\D+/g, "");
-    data.phone_number = data.phone_number.replace(/\D+/g, "");
-    const [day, month, year] = data.birth_date.split("/");
-    data.birth_date = `${year}-${month}-${day}`;
-    data.is_seller = isSeller;
+    data.phoneNumber = data.phoneNumber.replace(/\D+/g, "");
+    const [day, month, year] = data.birthDate.split("/");
+    data.birthDate = `${year}-${month}-${day}`;
+    data.isSeller = isSeller;
 
     await signupUser(data);
   };
@@ -134,17 +134,17 @@ const SignupPage: React.FC = () => {
                 label="Celular"
                 mask="(99) 99999-9999"
                 placeholder="(DDD) 90000-0000"
-                name="phone_number"
+                name="phoneNumber"
                 register={register}
-                error={!!errors.phone_number?.message}
+                error={!!errors.phoneNumber?.message}
               />
               <Input
                 label="Data de nascimento"
                 mask="99/99/9999"
                 placeholder="00/00/0000"
-                name="birth_date"
+                name="birthDate"
                 register={register}
-                error={!!errors.birth_date?.message}
+                error={!!errors.birthDate?.message}
               />
               <Input
                 label="Descrição"

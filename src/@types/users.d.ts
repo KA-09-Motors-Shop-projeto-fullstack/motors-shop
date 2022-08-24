@@ -5,10 +5,10 @@ export interface IUser {
   name: string;
   email: string;
   cpf: string;
-  phone_number: string;
-  birth_date: string;
+  phoneNumber: string;
+  birthDate: string;
   description: string;
-  is_seller: boolean;
+  isSeller: boolean;
   address: IAddress;
   created_at: string;
   updated_at: string;
@@ -18,10 +18,10 @@ export interface ICreateUser {
   name: string;
   email: string;
   cpf: string;
-  phone_number: string;
-  birth_date: string;
+  phoneNumber: string;
+  birthDate: string;
   description: string;
-  is_seller: boolean;
+  isSeller: boolean;
   cep: string;
   state: string;
   city: string;

@@ -34,7 +34,7 @@ const Profile: React.FC = () => {
           <NameContainer>
             <NameUser>{user.name}</NameUser>
             <Button typeButton="brandOpacity" typeFont="medium">
-              {user.is_seller && "Anunciante"}
+              {user.isSeller && "Anunciante"}
             </Button>
           </NameContainer>
           <DescriptionUser>{user.description}</DescriptionUser>
