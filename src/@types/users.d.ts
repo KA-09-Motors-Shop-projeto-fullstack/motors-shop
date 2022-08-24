@@ -5,6 +5,7 @@ export interface IUser {
   name: string;
   email: string;
   cpf: string;
+  avatarColor: string;
   phoneNumber: string;
   birthDate: string;
   description: string;
@@ -18,6 +19,7 @@ export interface ICreateUser {
   name: string;
   email: string;
   cpf: string;
+  avatarColor: string;
   phoneNumber: string;
   birthDate: string;
   description: string;
@@ -40,7 +42,7 @@ export interface ILoginUserResponse {
 }
 
 export type UserContextType = {
-  user: IUser | {};
+  user: IUser | undefined;
   signupUser: (data: ICreateUser) => Promise<void>;
   loginUser: (data: ILoginUser) => Promise<void>;
 };

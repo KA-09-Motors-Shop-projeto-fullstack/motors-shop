@@ -1,24 +1,29 @@
-import React, { ReactNode } from "react";
+import React, { ReactNode, useContext } from "react";
 import { HeaderStyle, Ul, Container, Line, ContainerLogged } from "./styles";
 import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
-import { NavLink, useHistory } from "react-router-dom";
+import { NavLink, Redirect, useHistory } from "react-router-dom";
 import Button from "../Button";
 import { isAuthenticated } from "../../services/auth";
 import Avatar from "../Avatar";
+import { UserContext } from "../../providers/Users";
+import { UserContextType } from "../../@types/users";
 
 interface IPropsHeader {
   children?: ReactNode;
 }
 
 const Header: React.FC<IPropsHeader> = ({ children }) => {
+  const { user } = useContext(UserContext) as UserContextType;
+
   const history = useHistory();
+  const goHome = () => history.push("/");
   const goSignup = () => history.push("/signup");
 
   return (
     <HeaderStyle>
       <Container>
-        <img src={Logo} alt="Motors Shop" />
+        <img src={Logo} alt="Motors Shop" onClick={() => goHome()} />
         <nav>
           <Ul>
             <li>
@@ -58,15 +63,15 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
               </LinkScroll>
             </li>
             <Line />
-            {isAuthenticated() ? (
+            {user ? (
               <ContainerLogged>
                 <Avatar
-                  color="random12"
-                  name="Omar Colombari"
+                  color={user.avatarColor}
+                  name={user.name}
                   fontSize={14}
                   size={32}
                 />
-                <h4>Omar Colombari</h4>
+                <h4>{user.name}</h4>
               </ContainerLogged>
             ) : (
               <>

@@ -30,7 +30,7 @@ const Profile: React.FC = () => {
           <White></White>
         </Rectangle>
         <ContainerInformations>
-          <Avatar fontSize={36} size={104} color="random1" name={user.name} />
+          <Avatar fontSize={36} size={104} color={user.avatarColor} name={user.name} />
           <NameContainer>
             <NameUser>{user.name}</NameUser>
             <Button typeButton="brandOpacity" typeFont="medium">

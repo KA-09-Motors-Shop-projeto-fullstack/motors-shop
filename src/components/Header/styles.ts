@@ -10,6 +10,9 @@ export const HeaderStyle = styled.header`
     cursor: pointer;
     text-decoration: none;
   }
+  img {
+    cursor: pointer;
+  }
 `;
 
 export const Ul = styled.ul`
