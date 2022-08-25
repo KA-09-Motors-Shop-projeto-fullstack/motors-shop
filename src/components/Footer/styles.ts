@@ -5,6 +5,9 @@ export const FooterStyle = styled.footer`
   display: flex;
   align-items: center;
   justify-content: space-around;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
   height: 140px;
   flex-direction: column;
   @media screen and (min-width: 780px) {

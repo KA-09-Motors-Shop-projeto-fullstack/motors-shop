@@ -7,7 +7,7 @@ interface IProps {
 }
 
 export const Container = styled.div<IProps>`
-  background-color: ${(props) => (props.theme.colors as any)[props.color]};
+  background-color: ${(props) => props.color};
   color: ${(props) => props.theme.colors.whiteFixed};
   font: ${(props) => props.theme.fonts["body-2-500"]};
   width: ${(props) => props.size}px;

@@ -22,7 +22,7 @@ import { AdvertisementContextType } from "../../@types/advertisements";
 import ModalSucess from "../ModalSucess";
 import { ModalContext } from "../../providers/Modals";
 import { ModalContextType } from "../../@types/modals";
-import { getToken } from "../../services/auth";
+import { getTokenLocalStorage } from "../../services/auth";
 
 const ModalCreate: React.FC = () => {
   // Chamando o provider
@@ -53,7 +53,7 @@ const ModalCreate: React.FC = () => {
     km: yup.number().required("Campo obrigatório"),
     price: yup.string().required("Campo obrigatório"),
     description: yup.string().required("Campo obrigatório"),
-    cover_image: yup.string().required("Campo obrigatório"),
+    coverImage: yup.string().required("Campo obrigatório"),
     image1: yup.string().required("Campo obrigatório"),
   });
 
@@ -76,13 +76,13 @@ const ModalCreate: React.FC = () => {
     data.images = images;
     data = {
       ...data,
-      type_ad: typeAd,
-      vehicle_type: vehicleType,
+      typeAd,
+      vehicleType,
     };
 
     reset();
 
-    const token = getToken();
+    const token = getTokenLocalStorage();
     await createAdvertisement(token, data).then(() => {
       closeModalCreate();
       openModalSucess();
@@ -190,9 +190,9 @@ const ModalCreate: React.FC = () => {
                 placeholder="Inserir URL da imagem"
                 type="text"
                 label="Inserir URL da imagem"
-                name="cover_image"
+                name="coverImage"
                 register={register}
-                error={!!errors.cover_image?.message}
+                error={!!errors.coverImage?.message}
               />
               {amountImage.map((element) => {
                 return (

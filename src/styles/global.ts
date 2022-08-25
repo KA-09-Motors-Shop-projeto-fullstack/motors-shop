@@ -53,4 +53,11 @@ export default createGlobalStyle`
     button {
         cursor: pointer;
     }
+    .App {
+        position: relative;
+        min-height: 100vh;
+    }
+    main {
+        padding-bottom: 140px;
+    }
 `;

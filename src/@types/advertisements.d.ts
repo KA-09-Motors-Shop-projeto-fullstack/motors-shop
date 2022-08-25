@@ -7,9 +7,9 @@ export interface IAdversiment {
   km: number;
   price: number;
   description: string;
-  cover_image: string;
-  type_ad: string;
-  vehicle_type: string;
+  coverImage: string;
+  typeAd: string;
+  vehicleType: string;
   created_at: string;
   updated_at: string;
   user: IUser;
@@ -22,9 +22,9 @@ interface ICreateAdvertisement {
   km: number;
   price: number;
   description: string;
-  cover_image: string;
-  type_ad: string;
-  vehicle_type: string;
+  coverImage: string;
+  typeAd: string;
+  vehicleType: string;
   images: [];
 }
 
