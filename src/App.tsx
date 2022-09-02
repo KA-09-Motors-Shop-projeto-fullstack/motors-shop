@@ -1,21 +1,12 @@
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
-import { Presentation } from "./style";
+import Routes from "./routes";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
-  const [count, setCount] = useState(0);
-
   return (
     <div className="App">
-      <Presentation>
-        <h1>
-          Template made by Marioto{" "}
-          <a href="https://github.com/henriquemarioto" target="_blank">
-            Paulo Marioto
-          </a>
-          &nbsp;♥
-        </h1>
-      </Presentation>
+      <ToastContainer autoClose={2000} />
+      <Routes />
     </div>
   );
 }
