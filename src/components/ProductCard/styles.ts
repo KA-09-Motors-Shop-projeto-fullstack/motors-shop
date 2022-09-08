@@ -57,7 +57,7 @@ export const Avatar = styled.div`
   height: 32px;
 `;
 
-export const Advertiser = styled.div`
+export const Advertiser = styled.a`
   span {
     font: ${(props) => props.theme.fonts["body-2-500"]};
     color: ${(props) => props.theme.colors.grey2};

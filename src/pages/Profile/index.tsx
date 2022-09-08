@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { ModalContextType } from "../../@types/modals";
 import Avatar from "../../components/Avatar";
 import Button from "../../components/Button";
@@ -16,10 +16,22 @@ import {
   Roxo,
   NameContainer,
 } from "./styles";
+import api from "../../services/api"
+import { useParams } from "react-router-dom";
 
 const Profile: React.FC = () => {
   const { openModalCreate } = useContext(ModalContext) as ModalContextType;
-  const user = getUserLocalStorage();
+  const [ user, setUser ] = useState(getUserLocalStorage());  
+  const { id } = useParams<any>();
+
+  useEffect( () => {
+    ( async () => {
+      const userId = user ? user.id : ""
+      
+      const response = await api.get("/")
+    })()
+  },[])
+
   return (
     <>
       <Header />
@@ -46,6 +58,8 @@ const Profile: React.FC = () => {
             Criar anúncio
           </Button>
         </ContainerInformations>
+
+        hello?
       </main>
       <Footer />
     </>

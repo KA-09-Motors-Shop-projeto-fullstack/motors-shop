@@ -12,6 +12,7 @@ import {
 } from "./styles";
 import Button from "../Button";
 import { IPropsProductCard } from "./types"
+import { Link } from "react-router-dom";
 
 const ProductCard: React.FC<IPropsProductCard> = ({
   carDescription,
@@ -20,7 +21,8 @@ const ProductCard: React.FC<IPropsProductCard> = ({
   carPrice,
   carYear,
   carImage,
-  carAdvertiser,
+  advertiserName,
+  advertiserId
 }) => {
   const MAX_DESCRIPTION_LENGTH = 75
 
@@ -43,10 +45,12 @@ const ProductCard: React.FC<IPropsProductCard> = ({
       <Title>{carTitle}</Title>
       <Description>{formatedDescription}</Description>
 
-      <Advertiser>
-        <Avatar>{carAdvertiser[0]}</Avatar>
-        <span>{carAdvertiser}</span>
-      </Advertiser>
+      <Link to={advertiserId} >
+        <Advertiser>
+            <Avatar>{advertiserName[0]}</Avatar>
+            <span>{advertiserName}</span>
+        </Advertiser>
+      </Link>
       <CardFooter>
         <ContainerTags>
           <Button typeButton="brandOpacity" typeFont="medium">

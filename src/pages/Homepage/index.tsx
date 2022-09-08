@@ -19,6 +19,7 @@ interface IAPIProduct {
   updated_at: string
   user: {
     name: string
+    id: string
   }
   vehicleType: string
   year: number
@@ -36,13 +37,14 @@ export const HomePage = () => {
       for(const filter of args){
         if(data.vehicleType === filter){
           filtered.push({
-            carAdvertiser: data.user.name,
+            advertiserName: data.user.name,
             carImage: data.coverImage,
             carPrice: String(data.price),
             carDescription: data.description,
             carKm: String(data.km),
             carTitle: data.title,
-            carYear: data.year
+            carYear: data.year,
+            advertiserId: data.user.id
           })
         }
       }

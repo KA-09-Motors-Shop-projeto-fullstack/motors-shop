@@ -12,7 +12,8 @@ export const NormalProductList = ({listTitle, allData}: Iprops) => {
     return(
       <li>
         <ProductCard
-          carAdvertiser={data.carAdvertiser}
+          advertiserName={data.advertiserName}
+          advertiserId={data.advertiserId}
           carDescription={data.carDescription}
           carImage={data.carImage}
           carKm={data.carKm}

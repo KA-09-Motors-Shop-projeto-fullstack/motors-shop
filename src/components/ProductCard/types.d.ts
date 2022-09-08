@@ -5,5 +5,6 @@ export interface IPropsProductCard {
   carKm: string;
   carYear: number;
   carImage: string;
-  carAdvertiser: string;
+  advertiserName: string;
+  advertiserId: string
 }
