@@ -45,7 +45,7 @@ const ProductCard: React.FC<IPropsProductCard> = ({
       <Title>{carTitle}</Title>
       <Description>{formatedDescription}</Description>
 
-      <Link to={advertiserId} >
+      <Link to={`/profile/${advertiserId}`} >
         <Advertiser>
             <Avatar>{advertiserName[0]}</Avatar>
             <span>{advertiserName}</span>

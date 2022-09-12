@@ -6,7 +6,7 @@ export const isAuthenticated = () => localStorage.getItem(TOKEN_KEY) !== null;
 export const getTokenLocalStorage = (): string =>
   JSON.parse(localStorage.getItem(TOKEN_KEY) || "");
 export const getUserLocalStorage = (): IUser =>
-  JSON.parse(localStorage.getItem(USER_KEY) || "");
+  JSON.parse(localStorage.getItem(USER_KEY) || "{}");
 export const login = (data: ILoginUserResponse) => {
   localStorage.clear();
   localStorage.setItem(TOKEN_KEY, JSON.stringify(data.token));

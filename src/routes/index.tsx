@@ -20,9 +20,9 @@ const Routes: React.FC = () => {
       <PrivateRoute exact path="/profile">
         <Profile />
       </PrivateRoute>
-      <PrivateRoute exact path="/profile/:id">
+      <Route exact path="/profile/:id">
         <Profile />
-      </PrivateRoute>
+      </Route>
     </Switch>
   );
 };

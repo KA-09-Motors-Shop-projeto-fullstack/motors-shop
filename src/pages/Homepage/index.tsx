@@ -6,8 +6,9 @@ import { NormalProductList } from "../../components/NormalProductList"
 import { IPropsProductCard } from "../../components/ProductCard/types"
 import { useEffect, useState } from "react"
 import api from "../../services/api"
+import { filterByCarType } from "../../utils/filterByCarType"
 
-interface IAPIProduct {
+export interface IAPIProduct {
   coverImage: string
   created_at: Date
   id: string
@@ -29,29 +30,6 @@ interface IAPIProduct {
 export const HomePage = () => {
   const [ cars, setCars ] = useState<Array<IPropsProductCard>>([]); 
   const [ bikes, setBikes ] = useState<Array<IPropsProductCard>>([]);
-
-  function filterByCarType(list: Array<IAPIProduct>, ...args: Array<string>){
-    const filtered: Array<IPropsProductCard> = []
-
-    for (const data of list){
-      for(const filter of args){
-        if(data.vehicleType === filter){
-          filtered.push({
-            advertiserName: data.user.name,
-            carImage: data.coverImage,
-            carPrice: String(data.price),
-            carDescription: data.description,
-            carKm: String(data.km),
-            carTitle: data.title,
-            carYear: data.year,
-            advertiserId: data.user.id
-          })
-        }
-      }
-    }
-
-    return filtered
-  }
 
   useEffect( () => {
     ( async () => {
@@ -115,8 +93,6 @@ export const HomePage = () => {
               />
             ) : undefined
           }
-
-          
         </ListsContainer>
       </main>
 

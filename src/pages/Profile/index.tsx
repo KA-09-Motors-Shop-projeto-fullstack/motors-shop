@@ -18,17 +18,33 @@ import {
 } from "./styles";
 import api from "../../services/api"
 import { useParams } from "react-router-dom";
+import { NormalProductList } from "../../components/NormalProductList";
+import { filterByCarType } from "../../utils/filterByCarType";
 
 const Profile: React.FC = () => {
+  const userLocalStorage = getUserLocalStorage()
+
   const { openModalCreate } = useContext(ModalContext) as ModalContextType;
-  const [ user, setUser ] = useState(getUserLocalStorage());  
+  const [ user, setUser ] = useState(userLocalStorage);
+  const [ cars, setCars] = useState([]);
+  const [ bikes, setBikes] = useState([]);
   const { id } = useParams<any>();
 
   useEffect( () => {
     ( async () => {
-      const userId = user ? user.id : ""
+      if(!id) return
       
-      const response = await api.get("/")
+      const [ userResponse, advertisementResponse ] = await Promise.all([
+        api.get(`/users/list/${id}`),
+        api.get(`/advertisements/user/${id}`)
+      ])
+
+      const filteredCars = filterByCarType(advertisementResponse.data, "car", "carro")
+      const filteredBikes = filterByCarType(advertisementResponse.data, "moto", "bike", "motorcicle")
+
+      setUser(userResponse.data)
+      setCars(filteredCars as any)
+      setBikes(filteredBikes as any)
     })()
   },[])
 
@@ -42,24 +58,49 @@ const Profile: React.FC = () => {
           <White></White>
         </Rectangle>
         <ContainerInformations>
-          <Avatar fontSize={36} size={104} color={user.avatarColor} name={user.name} />
-          <NameContainer>
-            <NameUser>{user.name}</NameUser>
-            <Button typeButton="brandOpacity" typeFont="medium">
-              {user.isSeller && "Anunciante"}
+        {
+          !!Object.entries(user).length && (
+            <>
+              <Avatar fontSize={36} size={104} color={user.avatarColor} name={user.name} />
+              <NameContainer>
+                <NameUser>{user.name}</NameUser>
+                <Button typeButton="brandOpacity" typeFont="medium">
+                  {user.isSeller && "Anunciante"}
+                </Button>
+              </NameContainer>
+              <DescriptionUser>{user.description}</DescriptionUser>
+            </>
+          )
+        }
+        {
+          userLocalStorage?.id === user.id && (
+            <Button
+              onClick={openModalCreate}
+              typeButton="outlineBrand1"
+              typeFont="big"
+            >
+              Criar anúncio
             </Button>
-          </NameContainer>
-          <DescriptionUser>{user.description}</DescriptionUser>
-          <Button
-            onClick={openModalCreate}
-            typeButton="outlineBrand1"
-            typeFont="big"
-          >
-            Criar anúncio
-          </Button>
+          )
+        }
         </ContainerInformations>
+        {
+            cars.length ? (
+              <NormalProductList
+                listTitle="Carros"
+                allData={cars}
+              />
+            ) : undefined
+          }
 
-        hello?
+          {
+            bikes.length ? (
+              <NormalProductList
+                listTitle="Motos"
+                allData={bikes}
+              />
+            ) : undefined
+          }
       </main>
       <Footer />
     </>
