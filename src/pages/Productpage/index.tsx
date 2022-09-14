@@ -16,6 +16,7 @@ import {
   FigureProduct,
   ProfileUserProduct,
 } from "./styles";
+import Commentary from "../../components/Commentary";
 
 export const ProductPage = () => {
   return (
@@ -60,6 +61,21 @@ export const ProductPage = () => {
           </DescriptionProduct>
           <CommentsProduct>
             <h2>Comentários</h2>
+            <Commentary
+              name={"Gabriel"}
+              color={"red"}
+              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
+            />
+            <Commentary
+              name={"Gabriel"}
+              color={"red"}
+              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
+            />
+            <Commentary
+              name={"Gabriel"}
+              color={"red"}
+              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
+            />
           </CommentsProduct>
           <DoACommentaryProduct>
             <div>
@@ -80,7 +96,7 @@ export const ProductPage = () => {
             <h2>Fotos</h2>
           </ImagensProduct>
           <ProfileUserProduct>
-            <Avatar name="gabriel" color={"red"} size={24} fontSize={20} />
+            <Avatar name="Gabriel" color="red" size={24} fontSize={20} />
             <h1>Gabriel</h1>
             <p>
               Lorem Ipsum is simply dummy text of the printing and typesetting

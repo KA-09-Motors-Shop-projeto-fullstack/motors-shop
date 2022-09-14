@@ -1,15 +1,15 @@
-import ProductCard from "../ProductCard"
-import { IPropsProductCard } from "../ProductCard/types"
+import ProductCard from "../ProductCard";
+import { IPropsProductCard } from "../ProductCard/types";
 import { Container } from "./styles";
 
 interface Iprops {
-  listTitle: string
-  allData: Array<IPropsProductCard>
+  listTitle: string;
+  allData: Array<IPropsProductCard>;
 }
 
-export const NormalProductList = ({listTitle, allData}: Iprops) => {
-  const products = allData.map( (data, i) => {
-    return(
+export const NormalProductList = ({ listTitle, allData }: Iprops) => {
+  const products = allData.map((data, i) => {
+    return (
       <li>
         <ProductCard
           carAdvertiser={data.carAdvertiser}
@@ -22,15 +22,13 @@ export const NormalProductList = ({listTitle, allData}: Iprops) => {
           key={i}
         />
       </li>
-    )
-  })
+    );
+  });
 
   return (
     <Container>
       <h2>{listTitle}</h2>
-      <ul>
-        {products}
-      </ul>
+      <ul>{products}</ul>
     </Container>
-  )
-}
+  );
+};

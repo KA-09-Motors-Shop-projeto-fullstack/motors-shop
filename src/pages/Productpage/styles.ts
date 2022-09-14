@@ -169,6 +169,7 @@ export const ProfileUserProduct = styled.section`
   height: 426px;
   border-radius: 4px;
   background-color: ${(props) => props.theme.colors["whiteFixed"]};
+
   h1 {
     font: ${(props) => props.theme.fonts["heading-7-600"]};
   }
