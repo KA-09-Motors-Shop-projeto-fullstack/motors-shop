@@ -1,13 +1,22 @@
 import React, { ReactNode, useContext } from "react";
-import { HeaderStyle, Ul, Container, Line, ContainerLogged } from "./styles";
+import {
+  HeaderStyle,
+  Ul,
+  Container,
+  Line,
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+} from "./styles";
 import Logo from "../../assets/LogoHeader.svg";
-import { Link as LinkScroll, animateScroll as scroll } from "react-scroll";
-import { NavLink, Redirect, useHistory } from "react-router-dom";
+import { Link as LinkScroll } from "react-scroll";
+import { NavLink, useHistory } from "react-router-dom";
 import Button from "../Button";
-import { isAuthenticated } from "../../services/auth";
 import Avatar from "../Avatar";
 import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+import { logout } from "../../services/auth";
 
 interface IPropsHeader {
   children?: ReactNode;
@@ -16,9 +25,17 @@ interface IPropsHeader {
 const Header: React.FC<IPropsHeader> = ({ children }) => {
   const { user } = useContext(UserContext) as UserContextType;
 
+  // Funções para rotas
   const history = useHistory();
   const goHome = () => history.push("/");
   const goSignup = () => history.push("/signup");
+  const goProfile = () => history.push("/profile");
+
+  // Formatar nome
+  const nameUserHeader = (name: string) => {
+    const nameArray = name.split(" ");
+    return `${nameArray[0]} ${nameArray[nameArray.length - 1]}`;
+  };
 
   return (
     <HeaderStyle>
@@ -64,15 +81,28 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
             </li>
             <Line />
             {user ? (
-              <ContainerLogged>
-                <Avatar
-                  color={user.avatarColor}
-                  name={user.name}
-                  fontSize={14}
-                  size={32}
-                />
-                <h4>{user.name}</h4>
-              </ContainerLogged>
+              <DropdownMenu.Root>
+                <DropdownMenuTrigger>
+                  <Avatar
+                    color={user.avatarColor}
+                    name={user.name}
+                    fontSize={14}
+                    size={32}
+                  />
+                  <h4>{nameUserHeader(user.name)}</h4>
+                </DropdownMenuTrigger>
+                <DropdownMenu.Portal>
+                  <DropdownMenuContent>
+                    <DropdownMenuItem onClick={goProfile}>
+                      Perfil
+                    </DropdownMenuItem>
+                    <DropdownMenuItem>Editar Perfil</DropdownMenuItem>
+                    <DropdownMenuItem>Editar endereço</DropdownMenuItem>
+                    <DropdownMenuItem>Minhas Compras</DropdownMenuItem>
+                    <DropdownMenuItem onClick={logout}>Sair</DropdownMenuItem>
+                  </DropdownMenuContent>
+                </DropdownMenu.Portal>
+              </DropdownMenu.Root>
             ) : (
               <>
                 <li>
@@ -99,3 +129,13 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
 };
 
 export default Header;
+/*
+<ContainerLogged>
+                <Avatar
+                  color={user.avatarColor}
+                  name={user.name}
+                  fontSize={14}
+                  size={32}
+                />
+                <h4>{nameUserHeader(user.name)}</h4>
+              </ContainerLogged>*/
