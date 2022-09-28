@@ -11,7 +11,18 @@ import {
   Title,
 } from "./styles";
 import Button from "../Button";
-import { IPropsProductCard } from "./types"
+import { useHistory } from "react-router-dom";
+
+interface IPropsProductCard {
+  carDescription: string;
+  carKm: string;
+  carTitle: string;
+  carPrice: string;
+  carYear: number;
+  carImage: string;
+  carAdvertiser: string;
+  carId: string;
+}
 
 const ProductCard: React.FC<IPropsProductCard> = ({
   carDescription,
@@ -21,21 +32,24 @@ const ProductCard: React.FC<IPropsProductCard> = ({
   carYear,
   carImage,
   carAdvertiser,
+  carId,
 }) => {
-  const MAX_DESCRIPTION_LENGTH = 75
+  const history = useHistory();
+  const MAX_DESCRIPTION_LENGTH = 75;
 
-  const formatedPrice = (Number(carPrice) || 0 ).toLocaleString("pt-br", {
-    style: "currency", 
-    currency: "BRL", 
+  const formatedPrice = (Number(carPrice) || 0).toLocaleString("pt-br", {
+    style: "currency",
+    currency: "BRL",
     minimumFractionDigits: 2,
-    maximumFractionDigits: 2
-  })
-  const formatedDescription = carDescription.length > MAX_DESCRIPTION_LENGTH ?
-    carDescription.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "..." :
-    carDescription;
+    maximumFractionDigits: 2,
+  });
+  const formatedDescription =
+    carDescription.length > MAX_DESCRIPTION_LENGTH
+      ? carDescription.substring(0, MAX_DESCRIPTION_LENGTH - 3) + "..."
+      : carDescription;
 
   return (
-    <Container>
+    <Container onClick={() => history.push(`/advertisements/${carId}`)}>
       <Figure>
         <img src={carImage} alt={carTitle} />
       </Figure>

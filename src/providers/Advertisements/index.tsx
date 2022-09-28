@@ -1,8 +1,8 @@
 import api from "../../services/api";
-import React, { createContext, useState } from "react";
+import React, { createContext, useEffect, useState } from "react";
 import {
   AdvertisementContextType,
-  IAdversiment,
+  IAdvertisement,
   ICreateAdvertisement,
 } from "../../@types/advertisements";
 
@@ -14,19 +14,19 @@ export const AdvertisementContext =
   createContext<AdvertisementContextType | null>(null);
 
 export const AdvertisementProvider: React.FC<IProps> = ({ children }) => {
-  const [advertisements, setAdvertisements] = useState<IAdversiment[]>([]);
+  const [advertisements, setAdvertisements] = useState<IAdvertisement[]>([]);
 
-  const listAllAdvertisements = async (token: string) => {
-    const { data } = await api.get<IAdversiment[]>("/advertisements", {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+  useEffect(() => {
+    listAllAdvertisements();
+  }, []);
+
+  const listAllAdvertisements = async () => {
+    const { data } = await api.get<IAdvertisement[]>("/advertisements");
     setAdvertisements(data);
   };
 
   const listAdvertisementsPerUser = async (token: string, userId: string) => {
-    const { data } = await api.get<IAdversiment[]>(
+    const { data } = await api.get<IAdvertisement[]>(
       `/advertisements/user/${userId}`,
       {
         headers: {
@@ -38,7 +38,7 @@ export const AdvertisementProvider: React.FC<IProps> = ({ children }) => {
   };
 
   const showAdvertisement = async (token: string, advertisementId: string) => {
-    const { data } = await api.get<IAdversiment>(
+    const { data } = await api.get<IAdvertisement>(
       `/advertisements/${advertisementId}`,
       {
         headers: {
@@ -54,7 +54,7 @@ export const AdvertisementProvider: React.FC<IProps> = ({ children }) => {
     token: string,
     data: ICreateAdvertisement
   ) => {
-    const { data: res } = await api.post<IAdversiment>(
+    const { data: res } = await api.post<IAdvertisement>(
       "/advertisements",
       data,
       {

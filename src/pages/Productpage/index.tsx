@@ -17,8 +17,27 @@ import {
   ProfileUserProduct,
 } from "./styles";
 import Commentary from "../../components/Commentary";
+import { useParams } from "react-router-dom";
+import { useContext } from "react";
+import { AdvertisementContext } from "../../providers/Advertisements";
+import { AdvertisementContextType } from "../../@types/advertisements";
+
+interface IParamsQuery {
+  advertisementId: string;
+}
 
 export const ProductPage = () => {
+  const { advertisementId } = useParams<IParamsQuery>();
+  const { advertisements } = useContext(
+    AdvertisementContext
+  ) as AdvertisementContextType;
+
+  const advertisment = advertisements.find(
+    (element) => element.id == advertisementId
+  );
+
+  console.log(advertisment);
+
   return (
     <>
       <Header />
@@ -26,7 +45,7 @@ export const ProductPage = () => {
         <LeftSidePage>
           <ImageProduct>
             <figure>
-              <img />
+              <img src={advertisment?.coverImage} />
             </figure>
           </ImageProduct>
           <AnnouncementProdut>

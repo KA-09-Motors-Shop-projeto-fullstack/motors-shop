@@ -7,6 +7,9 @@ export const Container = styled.div`
       outline: ${(props) => props.theme.colors.brand1} 2px solid;
     }
   }
+
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;

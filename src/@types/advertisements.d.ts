@@ -1,7 +1,7 @@
 import { IUser } from "./users";
 
-export interface IAdversiment {
-  id: number;
+export interface IAdvertisement {
+  id: string;
   title: string;
   year: number;
   km: number;
@@ -29,13 +29,13 @@ interface ICreateAdvertisement {
 }
 
 export type AdvertisementContextType = {
-  advertisements: IAdversiment[];
-  listAllAdvertisements: (token: string) => Promise<void>;
+  advertisements: IAdvertisement[];
+  listAllAdvertisements: () => Promise<void>;
   listAdvertisementsPerUser: (token: string, userId: string) => Promise<void>;
   showAdvertisement: (
     token: string,
     advertisementId: string
-  ) => Promise<IAdversiment>;
+  ) => Promise<IAdvertisement>;
   createAdvertisement: (
     token: string,
     dataAdvertisement: ICreateAdvertisement
