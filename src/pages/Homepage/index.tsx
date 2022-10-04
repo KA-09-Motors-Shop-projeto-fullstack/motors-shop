@@ -1,7 +1,7 @@
 import Footer from "../../components/Footer";
 import Header from "../../components/Header";
 import Button from "../../components/Button";
-import { InfoNavContainer, ListsContainer } from "./styles";
+import { InfoNavContainer, ListsContainer, Main } from "./styles";
 import { NormalProductList } from "../../components/NormalProductList";
 import { useContext, useEffect, useState } from "react";
 import api from "../../services/api";
@@ -35,7 +35,7 @@ export const HomePage = () => {
     <>
       <Header />
 
-      <main>
+      <Main>
         <InfoNavContainer>
           <div>
             <h2>Velocidade e experiência em um lugar feito para você</h2>
@@ -60,7 +60,7 @@ export const HomePage = () => {
             <NormalProductList title="Motos" advertisements={bikes} />
           ) : undefined}
         </ListsContainer>
-      </main>
+      </Main>
 
       <Footer />
     </>

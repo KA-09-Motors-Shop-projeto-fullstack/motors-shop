@@ -7,6 +7,7 @@ import { HomePage } from "../pages/Homepage";
 import { ProductPage } from "../pages/Productpage";
 
 const Routes: React.FC = () => {
+  
   return (
     <Switch>
       <Route exact path="/" component={HomePage} />

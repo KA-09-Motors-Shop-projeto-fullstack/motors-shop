@@ -72,6 +72,9 @@ export const Advertiser = styled.div`
 `;
 
 export const ContainerTags = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 20px;
   button {
     padding: 5px;
   }

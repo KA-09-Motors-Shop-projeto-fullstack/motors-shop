@@ -1,3 +1,5 @@
+import { IComment } from "./comments";
+import { IImages } from "./images";
 import { IUser } from "./users";
 
 export interface IAdvertisement {
@@ -13,7 +15,8 @@ export interface IAdvertisement {
   created_at: string;
   updated_at: string;
   user: IUser;
-  images: [];
+  images: IImages[];
+  comments: IComment[];
 }
 
 interface ICreateAdvertisement {
@@ -32,10 +35,7 @@ export type AdvertisementContextType = {
   advertisements: IAdvertisement[];
   listAllAdvertisements: () => Promise<void>;
   listAdvertisementsPerUser: (token: string, userId: string) => Promise<void>;
-  showAdvertisement: (
-    token: string,
-    advertisementId: string
-  ) => Promise<IAdvertisement>;
+  showAdvertisement: (advertisementId: string) => Promise<IAdvertisement>;
   createAdvertisement: (
     token: string,
     dataAdvertisement: ICreateAdvertisement

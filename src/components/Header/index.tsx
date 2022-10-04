@@ -17,25 +17,20 @@ import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 import { logout } from "../../services/auth";
+import { formatNameToTwoWords } from "../../utils/format-name-to-two-words";
 
 interface IPropsHeader {
   children?: ReactNode;
 }
 
 const Header: React.FC<IPropsHeader> = ({ children }) => {
-  const { user } = useContext(UserContext) as UserContextType;
+  const { userLogged } = useContext(UserContext) as UserContextType;
 
   // Funções para rotas
   const history = useHistory();
   const goHome = () => history.push("/");
   const goSignup = () => history.push("/signup");
   const goProfile = () => history.push("/profile");
-
-  // Formatar nome
-  const nameUserHeader = (name: string) => {
-    const nameArray = name.split(" ");
-    return `${nameArray[0]} ${nameArray[nameArray.length - 1]}`;
-  };
 
   return (
     <HeaderStyle>
@@ -80,16 +75,16 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
               </LinkScroll>
             </li>
             <Line />
-            {user ? (
+            {userLogged ? (
               <DropdownMenu.Root>
                 <DropdownMenuTrigger>
                   <Avatar
-                    color={user.avatarColor}
-                    name={user.name}
+                    color={userLogged.avatarColor}
+                    name={userLogged.name}
                     fontSize={14}
                     size={32}
                   />
-                  <h4>{nameUserHeader(user.name)}</h4>
+                  <h4>{formatNameToTwoWords(userLogged.name)}</h4>
                 </DropdownMenuTrigger>
                 <DropdownMenu.Portal>
                   <DropdownMenuContent>
@@ -129,13 +124,3 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
 };
 
 export default Header;
-/*
-<ContainerLogged>
-                <Avatar
-                  color={user.avatarColor}
-                  name={user.name}
-                  fontSize={14}
-                  size={32}
-                />
-                <h4>{nameUserHeader(user.name)}</h4>
-              </ContainerLogged>*/

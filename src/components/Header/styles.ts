@@ -5,6 +5,9 @@ export const HeaderStyle = styled.header`
   display: flex;
   justify-content: center;
   border-bottom: 2px solid ${(props) => props.theme.colors.grey6};
+  position: fixed;
+  width: 100%;
+  background: ${(props) => props.theme.colors.whiteFixed};
   a {
     font: ${(props) => props.theme.fonts["body-1-600"]};
     color: ${(props) => props.theme.colors.grey2};

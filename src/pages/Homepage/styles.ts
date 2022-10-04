@@ -1,5 +1,8 @@
 import styled from "styled-components";
-import theme from "../../styles/theme";
+
+export const Main = styled.main`
+  padding-top: 82px;
+`;
 
 export const InfoNavContainer = styled.section`
   display: flex;
@@ -10,7 +13,7 @@ export const InfoNavContainer = styled.section`
   width: 100%;
   min-height: fit-content;
   padding: 5% 25%;
-  background-color: ${theme.colors.brand2};
+  background-color: ${(props) => props.theme.colors.brand2};
   color: white;
 
   div {

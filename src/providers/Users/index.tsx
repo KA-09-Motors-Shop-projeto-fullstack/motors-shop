@@ -27,7 +27,7 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider: React.FC<IProps> = ({ children }) => {
   const history = useHistory();
-  const [user, setUser] = useState<IUser | undefined>(
+  const [userLogged, setUserLogged] = useState<IUser | undefined>(
     isAuthenticated() ? getUserLocalStorage() : undefined
   );
   const { openModalSucess } = useContext(ModalContext) as ModalContextType;
@@ -36,7 +36,7 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
     await api
       .post<ILoginUserResponse>("/users/login", data)
       .then(({ data: res }) => {
-        setUser(res.user);
+        setUserLogged(res.user);
         login(res);
         return history.push("/profile");
       })
@@ -66,7 +66,7 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
   };
 
   return (
-    <UserContext.Provider value={{ user, loginUser, signupUser }}>
+    <UserContext.Provider value={{ userLogged, loginUser, signupUser }}>
       {children}
     </UserContext.Provider>
   );
