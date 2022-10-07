@@ -27,8 +27,6 @@ import {
   CommentsContainer,
   CommentList,
   AddCommentContainer,
-  Textarea,
-  TextareaContainer,
 } from "./styles";
 
 // Providers
@@ -52,6 +50,7 @@ import { getTokenLocalStorage } from "../../services/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { Textarea } from "@/components/Textarea";
 
 //Interface
 interface IParamsQuery {
@@ -107,7 +106,7 @@ export const ProductPage = () => {
       comment: {
         text: data.text,
       },
-    }).then((res) => {
+    }).then(() => {
       reset();
       showAdvertisement(advertisementId).then((res) => {
         setComments(res.comments);
@@ -192,27 +191,16 @@ export const ProductPage = () => {
                   />
                   <h4>{formatNameToTwoWords(userLogged.name)}</h4>
                 </div>
-                <TextareaContainer onSubmit={handleSubmit(onSubmit)}>
-                  <Textarea
-                    {...register("text")}
-                    placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
-                  />
-                  <Button type="submit" typeButton="brand1" typeFont="big">
-                    Comentar
-                  </Button>
-                </TextareaContainer>
+                <Textarea
+                  name="text"
+                  register={register}
+                  handleSubmit={handleSubmit}
+                  onSubmit={onSubmit}
+                  placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                />
               </>
             ) : (
-              <TextareaContainer>
-                <Textarea placeholder="Digite seu comentário" />
-                <Button
-                  style={{ cursor: "default" }}
-                  typeButton="brandDisable"
-                  typeFont="big"
-                >
-                  Comentar
-                </Button>
-              </TextareaContainer>
+              <Textarea placeholder="Digite seu comentário" />
             )}
           </AddCommentContainer>
         </SectionCar>
