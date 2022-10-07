@@ -12,7 +12,7 @@ import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll } from "react-scroll";
 import { NavLink, useHistory } from "react-router-dom";
 import Button from "../Button";
-import Avatar from "../Avatar";
+import { Avatar } from "../Avatar";
 import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
@@ -23,7 +23,7 @@ interface IPropsHeader {
   children?: ReactNode;
 }
 
-const Header: React.FC<IPropsHeader> = ({ children }) => {
+export const Header: React.FC<IPropsHeader> = ({ children }) => {
   const { userLogged } = useContext(UserContext) as UserContextType;
 
   // Funções para rotas
@@ -122,5 +122,3 @@ const Header: React.FC<IPropsHeader> = ({ children }) => {
     </HeaderStyle>
   );
 };
-
-export default Header;

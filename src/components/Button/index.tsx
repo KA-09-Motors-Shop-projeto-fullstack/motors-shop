@@ -21,7 +21,7 @@ export interface IPropsButton extends ButtonHTMLAttributes<HTMLButtonElement> {
     | "brandDisable";
 }
 
-const Button: React.FC<IPropsButton> = ({
+export const Button: React.FC<IPropsButton> = ({
   children,
   typeFont,
   typeButton,
@@ -41,5 +41,3 @@ const Button: React.FC<IPropsButton> = ({
     </ButtonStyled>
   );
 };
-
-export default Button;

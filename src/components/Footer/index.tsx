@@ -4,7 +4,7 @@ import Logo from "../../assets/LogoFooter.svg";
 import { FaAngleUp } from "react-icons/fa";
 import { animateScroll } from "react-scroll";
 
-const Footer: React.FC = () => {
+export const Footer: React.FC = () => {
   const scrollToTop = animateScroll.scrollToTop;
 
   return (
@@ -17,5 +17,3 @@ const Footer: React.FC = () => {
     </FooterStyle>
   );
 };
-
-export default Footer;

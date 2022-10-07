@@ -8,7 +8,12 @@ export interface IPropsAvatar {
   fontSize: number;
 }
 
-const Avatar: React.FC<IPropsAvatar> = ({ color, name, fontSize, size }) => {
+export const Avatar: React.FC<IPropsAvatar> = ({
+  color,
+  name,
+  fontSize,
+  size,
+}) => {
   const createAvatarName = (firstName: string, lastName: string = "") => {
     return lastName[0]
       ? `${firstName[0]}${lastName[0]}`.toUpperCase()
@@ -28,5 +33,3 @@ const Avatar: React.FC<IPropsAvatar> = ({ color, name, fontSize, size }) => {
     </Container>
   );
 };
-
-export default Avatar;

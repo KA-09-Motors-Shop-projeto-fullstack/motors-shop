@@ -10,13 +10,13 @@ import {
 } from "./styles";
 import { compareDiffDates } from "../../utils/compare-diff-dates";
 
-interface IPropsCommentary {
+interface IPropsComment {
   user: IUser;
   textComment: string;
   date: string;
 }
 
-const Commentary = ({ textComment, user, date }: IPropsCommentary) => {
+export const Comment = ({ textComment, user, date }: IPropsComment) => {
   return (
     <CommentaryStyled>
       <TitleCommentary>
@@ -36,5 +36,3 @@ const Commentary = ({ textComment, user, date }: IPropsCommentary) => {
     </CommentaryStyled>
   );
 };
-
-export default Commentary;

@@ -1,7 +1,15 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar";
+// React
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+
+// Components
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/Button";
+import { Avatar } from "@/components/Avatar";
+import { Comment } from "@/components/Comment";
+
+// Styles
 import {
   Aside,
   CarInformationContainer,
@@ -22,29 +30,33 @@ import {
   Textarea,
   TextareaContainer,
 } from "./styles";
-import Commentary from "../../components/Comment";
-import { useParams } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
-import { AdvertisementContext } from "../../providers/Advertisements";
+
+// Providers
+import { AdvertisementContext } from "@/providers/Advertisements";
+import { UserContext } from "@/providers/Users";
+import { CommentContext } from "@/providers/Comments";
+
+// Types
 import {
   AdvertisementContextType,
   IAdvertisement,
-} from "../../@types/advertisements";
+} from "@/types/advertisements";
+import { UserContextType } from "@/types/users";
+import { CommentContextType, IComment } from "@/types/comments";
+
+// Utils
 import { formatNameToTwoWords } from "../../utils/format-name-to-two-words";
-import { UserContext } from "../../providers/Users";
-import { UserContextType } from "../../@types/users";
-import { CommentContext } from "../../providers/Comments";
-import { CommentContextType, IComment } from "../../@types/comments";
 import { getTokenLocalStorage } from "../../services/auth";
 
+// Forms
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
+//Interface
 interface IParamsQuery {
   advertisementId: string;
 }
-
 interface IFormInputs {
   text: string;
 }
@@ -97,6 +109,9 @@ export const ProductPage = () => {
       },
     }).then((res) => {
       reset();
+      showAdvertisement(advertisementId).then((res) => {
+        setComments(res.comments);
+      });
     });
   };
 
@@ -156,7 +171,7 @@ export const ProductPage = () => {
             <CommentList>
               {comments.map((comment) => {
                 return (
-                  <Commentary
+                  <Comment
                     date={comment.createdAt}
                     textComment={comment.text}
                     user={comment.user}
