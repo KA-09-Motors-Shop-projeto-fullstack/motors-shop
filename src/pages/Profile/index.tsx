@@ -1,9 +1,9 @@
 import React, { useContext, useState } from "react";
 import { ModalContextType } from "../../@types/modals";
-import Avatar from "../../components/Avatar";
-import Button from "../../components/Button";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import { Avatar } from "../../components/Avatar";
+import { Button } from "../../components/Button";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
 import ModalCreate from "../../components/ModalCreate";
 import { ModalContext } from "../../providers/Modals";
 import { getUserLocalStorage } from "../../services/auth";
@@ -30,7 +30,12 @@ const Profile: React.FC = () => {
           <White></White>
         </Rectangle>
         <ContainerInformations>
-          <Avatar fontSize={36} size={104} color={user.avatarColor} name={user.name} />
+          <Avatar
+            fontSize={36}
+            size={104}
+            color={user.avatarColor}
+            name={user.name}
+          />
           <NameContainer>
             <NameUser>{user.name}</NameUser>
             <Button typeButton="brandOpacity" typeFont="medium">

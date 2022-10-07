@@ -11,7 +11,7 @@ import {
 import Logo from "../../assets/LogoHeader.svg";
 import { Link as LinkScroll } from "react-scroll";
 import { NavLink, useHistory } from "react-router-dom";
-import Button from "../Button";
+import { Button } from "../Button";
 import { Avatar } from "../Avatar";
 import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";

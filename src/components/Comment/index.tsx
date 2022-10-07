@@ -1,6 +1,6 @@
 import React from "react";
 import { IUser } from "../../@types/users";
-import Avatar from "../Avatar";
+import { Avatar } from "../Avatar";
 import { formatNameToTwoWords } from "../../utils/format-name-to-two-words";
 import {
   CommentaryStyled,

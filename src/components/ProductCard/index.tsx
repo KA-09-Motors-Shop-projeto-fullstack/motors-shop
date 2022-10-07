@@ -10,7 +10,7 @@ import {
   Price,
   Title,
 } from "./styles";
-import Button from "../Button";
+import { Button } from "../Button";
 import { useHistory } from "react-router-dom";
 
 interface IPropsProductCard {

@@ -1,6 +1,6 @@
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
-import Button from "../../components/Button";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
+import { Button } from "../../components/Button";
 import { InfoNavContainer, ListsContainer, Main } from "./styles";
 import { NormalProductList } from "../../components/NormalProductList";
 import { useContext, useEffect, useState } from "react";

@@ -1,6 +1,6 @@
 import { Redirect } from "react-router-dom";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
 import { isAuthenticated } from "../../services/auth";
 import { Main } from "./styles";
 import React, { useContext } from "react";
@@ -12,7 +12,7 @@ import { useHistory } from "react-router-dom";
 import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";
 import Input from "../../components/Input";
-import Button from "../../components/Button";
+import { Button } from "../../components/Button";
 
 const LoginPage: React.FC = () => {
   const history = useHistory();

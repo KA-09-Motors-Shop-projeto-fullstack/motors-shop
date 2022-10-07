@@ -11,7 +11,7 @@ import {
   VehicleTypeContainer,
   ImagesRegisterContainer,
 } from "./styles";
-import Button from "../Button";
+import { Button } from "../Button";
 import { useHistory } from "react-router-dom";
 import Input from "../Input";
 import * as yup from "yup";
