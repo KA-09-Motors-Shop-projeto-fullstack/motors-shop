@@ -122,7 +122,7 @@ export const CommentsContainer = styled(Container)`
   padding: 44px;
 `;
 
-export const CommentList = styled.div`
+export const CommentList = styled.ul`
   margin-top: 24px;
   display: grid;
   grid-row-gap: 30px;

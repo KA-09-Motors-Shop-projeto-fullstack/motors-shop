@@ -170,11 +170,13 @@ export const ProductPage = () => {
             <CommentList>
               {comments.map((comment) => {
                 return (
-                  <Comment
-                    date={comment.createdAt}
-                    textComment={comment.text}
-                    user={comment.user}
-                  />
+                  <li key={comment.id}>
+                    <Comment
+                      date={comment.createdAt}
+                      textComment={comment.text}
+                      user={comment.user}
+                    />
+                  </li>
                 );
               })}
             </CommentList>
@@ -197,6 +199,7 @@ export const ProductPage = () => {
                   handleSubmit={handleSubmit}
                   onSubmit={onSubmit}
                   placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                  error={!!errors.text?.message}
                 />
               </>
             ) : (
@@ -208,11 +211,11 @@ export const ProductPage = () => {
           <ImagesContainer>
             <Title>Fotos</Title>
             <ul>
-              {advertisement.images.map(({ image }) => {
+              {advertisement.images.map(({ image, id }) => {
                 return (
-                  <li>
+                  <li key={id}>
                     <figure>
-                      <img src={image} alt="" />
+                      <img src={image} />
                     </figure>
                   </li>
                 );
