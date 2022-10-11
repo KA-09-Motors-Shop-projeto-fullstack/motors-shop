@@ -2,11 +2,21 @@ import styled from "styled-components";
 import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 export const HeaderStyle = styled.header`
-  display: flex;
-  justify-content: center;
-  border-bottom: 2px solid ${(props) => props.theme.colors.grey6};
   position: fixed;
   width: 100%;
+  height: 80px;
+  padding: 0 50px;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  border-bottom: 2px solid ${(props) => props.theme.colors.grey6};
+
+  nav {
+    height: 100%;
+  }
+
   background: ${(props) => props.theme.colors.whiteFixed};
   a {
     font: ${(props) => props.theme.fonts["body-1-600"]};
@@ -27,16 +37,7 @@ export const Ul = styled.ul`
   align-items: center;
 `;
 
-export const Container = styled.div`
-  display: flex;
-  width: 90%;
-  justify-content: space-between;
-  align-items: center;
-  height: 80px;
-  nav {
-    height: 100%;
-  }
-`;
+export const Container = styled.div``;
 
 export const Line = styled.li`
   width: 2px;

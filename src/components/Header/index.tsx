@@ -34,7 +34,6 @@ export const Header: React.FC<IPropsHeader> = ({ children }) => {
 
   return (
     <HeaderStyle>
-      <Container>
         <img src={Logo} alt="Motors Shop" onClick={() => goHome()} />
         <nav>
           <Ul>
@@ -118,7 +117,6 @@ export const Header: React.FC<IPropsHeader> = ({ children }) => {
             )}
           </Ul>
         </nav>
-      </Container>
     </HeaderStyle>
   );
 };
