@@ -7,6 +7,9 @@ export const Container = styled.div`
       outline: ${(props) => props.theme.colors.brand1} 2px solid;
     }
   }
+
+  cursor: pointer;
+
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -69,6 +72,9 @@ export const Advertiser = styled.div`
 `;
 
 export const ContainerTags = styled.div`
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-column-gap: 20px;
   button {
     padding: 5px;
   }

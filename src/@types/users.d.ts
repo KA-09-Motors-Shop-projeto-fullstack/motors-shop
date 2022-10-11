@@ -42,7 +42,7 @@ export interface ILoginUserResponse {
 }
 
 export type UserContextType = {
-  user: IUser | undefined;
+  userLogged: IUser | undefined;
   signupUser: (data: ICreateUser) => Promise<void>;
   loginUser: (data: ILoginUser) => Promise<void>;
 };

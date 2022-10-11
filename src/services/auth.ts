@@ -1,3 +1,4 @@
+import { useHistory } from "react-router-dom";
 import { ILoginUserResponse, IUser } from "../@types/users";
 
 export const TOKEN_KEY = "@motorsshop:token";
@@ -14,4 +15,6 @@ export const login = (data: ILoginUserResponse) => {
 };
 export const logout = () => {
   localStorage.clear();
+  const history = useHistory();
+  history.push("/");
 };

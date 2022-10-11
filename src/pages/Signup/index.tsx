@@ -3,9 +3,9 @@ import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
 import { Redirect, useHistory } from "react-router-dom";
-import Button from "../../components/Button";
-import Footer from "../../components/Footer";
-import Header from "../../components/Header";
+import { Button } from "../../components/Button";
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
 import Input from "../../components/Input";
 import { isAuthenticated } from "../../services/auth";
 import {

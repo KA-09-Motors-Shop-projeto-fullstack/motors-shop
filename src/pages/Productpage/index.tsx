@@ -1,115 +1,241 @@
-import Header from "../../components/Header";
-import Footer from "../../components/Footer";
-import Button from "../../components/Button";
-import Avatar from "../../components/Avatar";
+// React
+import { useParams } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+
+// Components
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { Button } from "@/components/Button";
+import { Avatar } from "@/components/Avatar";
+import { Comment } from "@/components/Comment";
+
+// Styles
 import {
-  LeftSidePage,
-  RightSidePage,
-  MainProduct,
-  ImageProduct,
-  AnnouncementProdut,
-  YearPriceProduct,
-  DescriptionProduct,
-  CommentsProduct,
-  DoACommentaryProduct,
-  ImagensProduct,
-  FigureProduct,
-  ProfileUserProduct,
+  Aside,
+  CarInformationContainer,
+  CoverImageContainer,
+  ImagesContainer,
+  MainContainer,
+  SectionCar,
+  UserContainer,
+  CarDescriptionContainer,
+  CoverImage,
+  Rectangle,
+  Title,
+  PriceAndYearContainer,
+  Description,
+  CommentsContainer,
+  CommentList,
+  AddCommentContainer,
 } from "./styles";
-import Commentary from "../../components/Commentary";
+
+// Providers
+import { AdvertisementContext } from "@/providers/Advertisements";
+import { UserContext } from "@/providers/Users";
+import { CommentContext } from "@/providers/Comments";
+
+// Types
+import {
+  AdvertisementContextType,
+  IAdvertisement,
+} from "@/types/advertisements";
+import { UserContextType } from "@/types/users";
+import { CommentContextType, IComment } from "@/types/comments";
+
+// Utils
+import { formatNameToTwoWords } from "../../utils/format-name-to-two-words";
+import { getTokenLocalStorage } from "../../services/auth";
+
+// Forms
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import { Textarea } from "@/components/Textarea";
+
+//Interface
+interface IParamsQuery {
+  advertisementId: string;
+}
+export interface IFormInputsTextarea {
+  text: string;
+}
 
 export const ProductPage = () => {
+  // Query Params
+  const { advertisementId } = useParams<IParamsQuery>();
+
+  // Context
+  const { showAdvertisement } = useContext(
+    AdvertisementContext
+  ) as AdvertisementContextType;
+  const { userLogged } = useContext(UserContext) as UserContextType;
+  const { postComment } = useContext(CommentContext) as CommentContextType;
+
+  // States
+  const [advertisement, setAdvertisement] = useState<
+    IAdvertisement | undefined
+  >();
+  const [comments, setComments] = useState<IComment[]>([]);
+
+  // UseEffect
+  useEffect(() => {
+    showAdvertisement(advertisementId).then((res) => {
+      setAdvertisement(res);
+      setComments(res.comments);
+    });
+  }, []);
+
+  // Form
+  const schema = yup.object({
+    text: yup.string().required(),
+  });
+
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors },
+  } = useForm<IFormInputsTextarea>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit = (data: IFormInputsTextarea) => {
+    postComment({
+      token: getTokenLocalStorage(),
+      advertisementId,
+      comment: {
+        text: data.text,
+      },
+    }).then(() => {
+      reset();
+      showAdvertisement(advertisementId).then((res) => {
+        setComments(res.comments);
+      });
+    });
+  };
+
+  if (!advertisement) {
+    return;
+  }
+
   return (
     <>
       <Header />
-      <MainProduct>
-        <LeftSidePage>
-          <ImageProduct>
+      <Rectangle />
+      <MainContainer>
+        <SectionCar>
+          <CoverImageContainer>
             <figure>
-              <img />
+              <CoverImage src={advertisement.coverImage} alt="" />
             </figure>
-          </ImageProduct>
-          <AnnouncementProdut>
-            <h2>Nome do produto</h2>
-            <YearPriceProduct>
-              <div>
-                <Button typeButton="brandOpacity" typeFont="medium">
-                  ano
-                </Button>
-                <Button typeButton="brandOpacity" typeFont="medium">
-                  KM
-                </Button>
-              </div>
-              <div>
-                <p>R$000,00</p>
-              </div>
-            </YearPriceProduct>
+          </CoverImageContainer>
+          <CarInformationContainer>
             <div>
-              <Button typeButton="brand1" typeFont="medium">
-                Comprar
-              </Button>
+              <Title>{advertisement.title}</Title>
+              <PriceAndYearContainer>
+                <div>
+                  <Button typeButton="brandOpacity" typeFont="medium">
+                    {advertisement.year}
+                  </Button>
+                  <Button
+                    style={{ marginLeft: 12 }}
+                    typeButton="brandOpacity"
+                    typeFont="medium"
+                  >
+                    {advertisement.km.toLocaleString("pt-br")} KM
+                  </Button>
+                </div>
+                <strong>
+                  {advertisement.price.toLocaleString("pt-br", {
+                    style: "currency",
+                    currency: "BRL",
+                  })}
+                </strong>
+              </PriceAndYearContainer>
             </div>
-          </AnnouncementProdut>
-          <DescriptionProduct>
-            <h2>Descrição</h2>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s, when an unknown printer took a galley of
-              type and scrambled it to make a type specimen book.
-            </p>
-          </DescriptionProduct>
-          <CommentsProduct>
-            <h2>Comentários</h2>
-            <Commentary
-              name={"Gabriel"}
-              color={"red"}
-              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
-            />
-            <Commentary
-              name={"Gabriel"}
-              color={"red"}
-              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
-            />
-            <Commentary
-              name={"Gabriel"}
-              color={"red"}
-              textCommentary="AUEIAUEHOAIUEHAOEIUHAEO"
-            />
-          </CommentsProduct>
-          <DoACommentaryProduct>
-            <div>
-              <Avatar name="gabriel" color="red" size={24} fontSize={20} />
-            </div>
-            <div className="divTextAreaButton">
-              <input placeholder="Carro muito confortável, foi uma ótima experiência de compra..." />
-
-              <Button typeButton="brand1" typeFont="medium" type="submit">
-                Comentar
-              </Button>
-            </div>
-            <div></div>
-          </DoACommentaryProduct>
-        </LeftSidePage>
-        <RightSidePage>
-          <ImagensProduct>
-            <h2>Fotos</h2>
-          </ImagensProduct>
-          <ProfileUserProduct>
-            <Avatar name="Gabriel" color="red" size={24} fontSize={20} />
-            <h1>Gabriel</h1>
-            <p>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the
-            </p>
-            <Button typeButton="default" typeFont="medium">
-              Ver todos anuncios
+            <Button
+              style={{ marginTop: 15 }}
+              typeButton="brand1"
+              typeFont="big"
+            >
+              Comprar
             </Button>
-          </ProfileUserProduct>
-        </RightSidePage>
-      </MainProduct>
-
+          </CarInformationContainer>
+          <CarDescriptionContainer>
+            <Title>Descrição</Title>
+            <Description>{advertisement.description}</Description>
+          </CarDescriptionContainer>
+          <CommentsContainer>
+            <Title>Comentários</Title>
+            <CommentList>
+              {comments.map((comment) => {
+                return (
+                  <li key={comment.id}>
+                    <Comment
+                      date={comment.createdAt}
+                      textComment={comment.text}
+                      user={comment.user}
+                    />
+                  </li>
+                );
+              })}
+            </CommentList>
+          </CommentsContainer>
+          <AddCommentContainer>
+            {userLogged ? (
+              <>
+                <div>
+                  <Avatar
+                    name={userLogged.name}
+                    color={userLogged.avatarColor}
+                    size={32}
+                    fontSize={14}
+                  />
+                  <h4>{formatNameToTwoWords(userLogged.name)}</h4>
+                </div>
+                <Textarea
+                  register={register}
+                  handleSubmit={handleSubmit}
+                  onSubmit={onSubmit}
+                  placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                  error={!!errors.text?.message}
+                />
+              </>
+            ) : (
+              <Textarea placeholder="Digite seu comentário" />
+            )}
+          </AddCommentContainer>
+        </SectionCar>
+        <Aside>
+          <ImagesContainer>
+            <Title>Fotos</Title>
+            <ul>
+              {advertisement.images.map(({ image, id }) => {
+                return (
+                  <li key={id}>
+                    <figure>
+                      <img src={image} />
+                    </figure>
+                  </li>
+                );
+              })}
+            </ul>
+          </ImagesContainer>
+          <UserContainer>
+            <Avatar
+              name={advertisement.user.name}
+              color={advertisement.user.avatarColor}
+              size={104}
+              fontSize={36}
+            />
+            <Title>{advertisement.user.name}</Title>
+            <Description>{advertisement.user.description}</Description>
+            <Button typeButton="default" typeFont="big">
+              Ver todos os anúncios
+            </Button>
+          </UserContainer>
+        </Aside>
+      </MainContainer>
       <Footer />
     </>
   );

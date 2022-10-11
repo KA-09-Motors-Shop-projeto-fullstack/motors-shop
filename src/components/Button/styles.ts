@@ -137,6 +137,7 @@ class Buttons {
     border: 1.5px solid ${(props) => props.theme.colors.brand3};
     border-radius: 4px;
     color: ${(props) => props.theme.colors.brand4};
+    cursor: auto;
   `;
   static big = css<IPropsButton>`
     font: ${(props) => props.theme.fonts["button-big-text"]};

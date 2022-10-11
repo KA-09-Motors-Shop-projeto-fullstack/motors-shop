@@ -1,25 +1,26 @@
 import ProductCard from "../ProductCard";
-import { IPropsProductCard } from "../ProductCard/types";
 import { Container } from "./styles";
+import { IAdvertisement } from "../../@types/advertisements";
 
-interface Iprops {
-  listTitle: string;
-  allData: Array<IPropsProductCard>;
+interface IProps {
+  title: string;
+  advertisements: IAdvertisement[];
 }
 
-export const NormalProductList = ({ listTitle, allData }: Iprops) => {
-  const products = allData.map((data, i) => {
+export const NormalProductList = ({ advertisements, title }: IProps) => {
+  const cards = advertisements.map((advertisement) => {
     return (
       <li>
         <ProductCard
-          carAdvertiser={data.carAdvertiser}
-          carDescription={data.carDescription}
-          carImage={data.carImage}
-          carKm={data.carKm}
-          carPrice={data.carPrice}
-          carTitle={data.carTitle}
-          carYear={data.carYear}
-          key={i}
+          carAdvertiser={advertisement.user.name}
+          carDescription={advertisement.description}
+          carImage={advertisement.coverImage}
+          carKm={String(advertisement.km)}
+          carPrice={String(advertisement.price)}
+          carTitle={advertisement.title}
+          carYear={advertisement.year}
+          carId={advertisement.id}
+          key={advertisement.id}
         />
       </li>
     );
@@ -27,8 +28,8 @@ export const NormalProductList = ({ listTitle, allData }: Iprops) => {
 
   return (
     <Container>
-      <h2>{listTitle}</h2>
-      <ul>{products}</ul>
+      <h2>{title}</h2>
+      <ul>{cards}</ul>
     </Container>
   );
 };

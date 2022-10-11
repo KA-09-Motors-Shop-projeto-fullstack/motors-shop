@@ -1,5 +1,7 @@
 import styled from "styled-components";
-import theme from "../../styles/theme"
+
+export const Main = styled.main`
+`;
 
 export const InfoNavContainer = styled.section`
   display: flex;
@@ -10,22 +12,20 @@ export const InfoNavContainer = styled.section`
   width: 100%;
   min-height: fit-content;
   padding: 5% 25%;
-  background-color: ${theme.colors.brand2};
+  background-color: ${(props) => props.theme.colors.brand2};
   color: white;
-  
+
   div {
     text-align: center;
 
     h2 {
-      font-weight: 700;
-      font-size: 2.2rem;
+      font: ${(props) => props.theme.fonts["heading-1-700"]};
       line-height: 56px;
     }
-    
+
     p {
       margin-top: 20px;
-      font-weight: 400;
-      font-size: 1rem;
+      font: ${(props) => props.theme.fonts["body-1-400"]};
     }
   }
 

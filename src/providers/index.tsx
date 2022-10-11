@@ -1,5 +1,6 @@
 import React from "react";
 import { AdvertisementProvider } from "./Advertisements";
+import { CommentProvider } from "./Comments";
 import { ModalProvider } from "./Modals";
 import { UserProvider } from "./Users";
 
@@ -11,7 +12,9 @@ const Providers: React.FC<IProps> = ({ children }) => {
   return (
     <ModalProvider>
       <AdvertisementProvider>
-        <UserProvider>{children}</UserProvider>
+        <UserProvider>
+          <CommentProvider>{children}</CommentProvider>
+        </UserProvider>
       </AdvertisementProvider>
     </ModalProvider>
   );

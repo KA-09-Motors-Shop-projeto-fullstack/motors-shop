@@ -1,73 +1,41 @@
-import Footer from "../../components/Footer"
-import Header from "../../components/Header"
-import Button from "../../components/Button"
-import { InfoNavContainer, ListsContainer } from "./styles"
-import { NormalProductList } from "../../components/NormalProductList"
-import { IPropsProductCard } from "../../components/ProductCard/types"
-import { useEffect, useState } from "react"
-import api from "../../services/api"
-
-interface IAPIProduct {
-  coverImage: string
-  created_at: Date
-  id: string
-  images: Array<string>
-  km: number
-  price: number
-  title: string
-  typeAd: string
-  updated_at: string
-  user: {
-    name: string
-  }
-  vehicleType: string
-  year: number
-  description: string
-}
+import { Footer } from "../../components/Footer";
+import { Header } from "../../components/Header";
+import { Button } from "../../components/Button";
+import { InfoNavContainer, ListsContainer, Main } from "./styles";
+import { NormalProductList } from "../../components/NormalProductList";
+import { useContext, useEffect, useState } from "react";
+import api from "../../services/api";
+import {
+  AdvertisementContextType,
+  IAdvertisement,
+} from "../../@types/advertisements";
+import { AdvertisementContext } from "../../providers/Advertisements";
 
 export const HomePage = () => {
-  const [ cars, setCars ] = useState<Array<IPropsProductCard>>([]); 
-  const [ bikes, setBikes ] = useState<Array<IPropsProductCard>>([]);
+  const { advertisements } = useContext(
+    AdvertisementContext
+  ) as AdvertisementContextType;
+  const [cars, setCars] = useState<IAdvertisement[]>([]);
+  const [bikes, setBikes] = useState<IAdvertisement[]>([]);
 
-  function filterByCarType(list: Array<IAPIProduct>, ...args: Array<string>){
-    const filtered: Array<IPropsProductCard> = []
-
-    for (const data of list){
-      for(const filter of args){
-        if(data.vehicleType === filter){
-          filtered.push({
-            carAdvertiser: data.user.name,
-            carImage: data.coverImage,
-            carPrice: String(data.price),
-            carDescription: data.description,
-            carKm: String(data.km),
-            carTitle: data.title,
-            carYear: data.year
-          })
-        }
-      }
-    }
-
-    return filtered
-  }
-
-  useEffect( () => {
-    ( async () => {
-      const apiData = (await api.get("/advertisements")).data as Array<IAPIProduct>
-
-      const filteredCars = filterByCarType(apiData, "car", "carro")
-      const filteredBikes = filterByCarType(apiData, "moto", "bike", "motorcicle")
-
-      setCars(filteredCars)
-      setBikes(filteredBikes)
-    })()
-  }, [])
+  useEffect(() => {
+    setCars(
+      advertisements.filter(
+        (advertisement) => advertisement.vehicleType == "car"
+      )
+    );
+    setBikes(
+      advertisements.filter(
+        (advertisement) => advertisement.vehicleType == "motorcycle"
+      )
+    );
+  }, [advertisements]);
 
   return (
     <>
       <Header />
 
-      <main>
+      <Main>
         <InfoNavContainer>
           <div>
             <h2>Velocidade e experiência em um lugar feito para você</h2>
@@ -75,50 +43,26 @@ export const HomePage = () => {
           </div>
 
           <nav>
-            <Button
-              typeButton="outline2"
-              typeFont="medium"
-              children="Leilão"
-            />
+            <Button typeButton="outline2" typeFont="medium" children="Leilão" />
 
-            <Button
-              typeButton="outline2"
-              typeFont="medium"
-              children="Carros"
-            />
+            <Button typeButton="outline2" typeFont="medium" children="Carros" />
 
-            <Button
-              typeButton="outline2"
-              typeFont="medium"
-              children="Motos"
-            />
+            <Button typeButton="outline2" typeFont="medium" children="Motos" />
           </nav>
         </InfoNavContainer>
 
         <ListsContainer>
-          {
-            cars.length ? (
-              <NormalProductList
-                listTitle="Carros"
-                allData={cars}
-              />
-            ) : undefined
-          }
+          {cars.length ? (
+            <NormalProductList title="Carros" advertisements={cars} />
+          ) : undefined}
 
-          {
-            bikes.length ? (
-              <NormalProductList 
-                listTitle="Motos"
-                allData={bikes}
-              />
-            ) : undefined
-          }
-
-          
+          {bikes.length ? (
+            <NormalProductList title="Motos" advertisements={bikes} />
+          ) : undefined}
         </ListsContainer>
-      </main>
+      </Main>
 
       <Footer />
     </>
-  )
-}
+  );
+};
