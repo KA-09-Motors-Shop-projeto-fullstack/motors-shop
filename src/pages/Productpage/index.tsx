@@ -56,7 +56,7 @@ import { Textarea } from "@/components/Textarea";
 interface IParamsQuery {
   advertisementId: string;
 }
-interface IFormInputs {
+export interface IFormInputsTextarea {
   text: string;
 }
 
@@ -95,11 +95,11 @@ export const ProductPage = () => {
     handleSubmit,
     reset,
     formState: { errors },
-  } = useForm<IFormInputs>({
+  } = useForm<IFormInputsTextarea>({
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data: IFormInputs) => {
+  const onSubmit = (data: IFormInputsTextarea) => {
     postComment({
       token: getTokenLocalStorage(),
       advertisementId,
@@ -194,7 +194,6 @@ export const ProductPage = () => {
                   <h4>{formatNameToTwoWords(userLogged.name)}</h4>
                 </div>
                 <Textarea
-                  name="text"
                   register={register}
                   handleSubmit={handleSubmit}
                   onSubmit={onSubmit}

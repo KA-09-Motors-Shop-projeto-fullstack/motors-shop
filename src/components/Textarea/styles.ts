@@ -1,10 +1,10 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 
 interface IPropsTextarea {
   error?: boolean;
 }
 
-export const Textarea = styled.textarea<IPropsTextarea>`
+export const TextareaStyled = styled.textarea<IPropsTextarea>`
   resize: none;
   width: 100%;
   height: 128px;

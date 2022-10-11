@@ -8,21 +8,31 @@ const Container = styled.div`
 // Containers
 export const ImagesContainer = styled(Container)`
   padding: 44px;
-  * {
+
+  li,
+  img,
+  figure,
+  ul {
     padding: 0;
     margin: 0;
   }
+
+  li {
+    height: 120px;
+  }
+
   ul {
     display: grid;
     grid-template-columns: 33% 33% 33%;
     grid-column-gap: 14px;
     grid-row-gap: 32px;
+
+    margin-top: 20px;
   }
-  figure {
-    img {
-      width: 100%;
-      height: 100%;
-    }
+  figure,
+  img {
+    width: 100%;
+    height: 100%;
   }
 `;
 
@@ -89,7 +99,7 @@ export const MainContainer = styled.main`
 export const Aside = styled.aside`
   display: grid;
   grid-row-gap: 34px;
-  max-width: 35vw;
+  max-width: 40vw;
 `;
 
 export const SectionCar = styled.section`
@@ -144,6 +154,4 @@ export const AddCommentContainer = styled(Container)`
 
 // Form
 
-
 // Textarea
-
