@@ -31,9 +31,8 @@ export const HeaderStyle = styled.header`
 
 export const Ul = styled.ul`
   display: flex;
-  gap: 10px;
+  gap: 25px;
   justify-content: space-around;
-  width: 40vw;
   align-items: center;
 `;
 
@@ -45,9 +44,9 @@ export const Line = styled.li`
   background-color: ${(props) => props.theme.colors.grey6};
 `;
 
-// Estilização do menu dropdown
+// Estilização do menu dropdown desktop
 
-export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
+export const DropdownMenuTriggerDesktop = styled(DropdownMenu.Trigger)`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -64,14 +63,14 @@ export const DropdownMenuTrigger = styled(DropdownMenu.Trigger)`
   }
 `;
 
-export const DropdownMenuContent = styled(DropdownMenu.Content)`
+export const DropdownMenuContentDesktop = styled(DropdownMenu.Content)`
   width: 200px;
   background: ${(props) => props.theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
 `;
 
-export const DropdownMenuItem = styled(DropdownMenu.Item)`
+export const DropdownMenuItemDesktop = styled(DropdownMenu.Item)`
   all: "unset";
   border-radius: 4px;
 
@@ -87,5 +86,44 @@ export const DropdownMenuItem = styled(DropdownMenu.Item)`
 
   &:focus {
     outline: none;
+  }
+`;
+
+// Estilização do menu dropdown mobile
+
+export const DropdownMenuTriggerMobile = styled(DropdownMenu.Trigger)`
+  background-color: transparent;
+`;
+
+export const DropdownMenuContentMobile = styled(DropdownMenu.Content)`
+  width: 100vw;
+  background: ${(props) => props.theme.colors.grey9};
+  box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
+  border-radius: 4px;
+`;
+
+export const DropdownMenuItemMobile = styled(DropdownMenu.Item)`
+  all: "unset";
+  border-radius: 4px;
+  color: ${(props) => props.theme.colors.grey2};
+  font: ${(props) => props.theme.fonts["body-1-600"]};
+  padding: 18px 15px;
+`;
+
+// Responsividade
+
+export const NavMobile = styled.nav`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media screen and (min-width: 768px) {
+    display: none;
+  }
+`;
+
+export const NavDesktop = styled.nav`
+  @media screen and (max-width: 767px) {
+    display: none;
   }
 `;
