@@ -17,10 +17,6 @@ export const ImagesContainer = styled(Container)`
     margin: 0;
   }
 
-  li {
-    height: 120px;
-  }
-
   ul {
     display: grid;
     grid-template-columns: 33% 33% 33%;
@@ -90,23 +86,29 @@ export const Rectangle = styled.div`
 
 // Main, Aside e Section
 export const MainContainer = styled.main`
-  display: flex;
-  justify-content: space-around;
-  align-items: flex-start;
   padding-top: 110px;
+  padding-bottom: calc(140px + 73px);
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
 export const Aside = styled.aside`
   display: grid;
   grid-row-gap: 34px;
-  max-width: 40vw;
 `;
 
 export const SectionCar = styled.section`
-  width: 50vw;
   display: grid;
+  grid-template-columns: 50% 46%;
+  width: 95vw;
+  grid-column-gap: 46px;
   grid-row-gap: 16px;
-  margin-bottom: 73px;
+
+  @media screen and (max-width: 768px) {
+    grid-template-columns: none;
+  }
 `;
 
 // Title e Description
@@ -136,6 +138,7 @@ export const CommentList = styled.ul`
   margin-top: 24px;
   display: grid;
   grid-row-gap: 30px;
+  padding: 0;
 `;
 
 export const AddCommentContainer = styled(Container)`
@@ -155,3 +158,65 @@ export const AddCommentContainer = styled(Container)`
 // Form
 
 // Textarea
+
+interface IPropsTextarea {
+  error?: boolean;
+}
+
+export const TextareaStyled = styled.textarea<IPropsTextarea>`
+  resize: none;
+  width: 100%;
+  height: 128px;
+  padding: 24px 16px;
+
+  font: ${(props) => props.theme.fonts["input-placeholder"]};
+
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: ${(props) => props.theme.colors.grey6};
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: ${(props) => props.theme.colors.brand1};
+    border-radius: 20px;
+    border: 2px solid ${(props) => props.theme.colors.grey6};
+  }
+
+  &:focus {
+    outline: none;
+  }
+  &:placeholder {
+    font: ${(props) => props.theme.fonts["input-placeholder"]};
+    color: ${(props) => props.theme.colors.grey3};
+  }
+`;
+
+export const TextareaContainer = styled.form<IPropsTextarea>`
+  display: flex;
+  flex-direction: column;
+  margin-top: 20px;
+
+  border: 1.5px solid
+    ${(props) =>
+      props.error ? props.theme.colors.alert1 : props.theme.colors.grey7};
+  border-radius: 4px;
+  button {
+    align-self: end;
+  }
+`;
+
+// Others
+
+export const FirstDivOfSection = styled.div`
+  display: grid;
+  gap: 20px;
+`;
+
+export const SecondDivOfSection = styled.div`
+  width: 100%;
+  display: grid;
+  gap: 16px;
+`;

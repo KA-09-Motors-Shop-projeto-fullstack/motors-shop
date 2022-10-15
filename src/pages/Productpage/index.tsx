@@ -1,5 +1,5 @@
 // React
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 
 // Components
@@ -27,6 +27,10 @@ import {
   CommentsContainer,
   CommentList,
   AddCommentContainer,
+  TextareaContainer,
+  TextareaStyled,
+  FirstDivOfSection,
+  SecondDivOfSection,
 } from "./styles";
 
 // Providers
@@ -50,8 +54,6 @@ import { getTokenLocalStorage } from "../../services/auth";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Textarea } from "@/components/Textarea";
-
 //Interface
 interface IParamsQuery {
   advertisementId: string;
@@ -61,7 +63,8 @@ export interface IFormInputsTextarea {
 }
 
 export const ProductPage = () => {
-  // Query Params
+  // React Router Dom
+  const history = useHistory();
   const { advertisementId } = useParams<IParamsQuery>();
 
   // Context
@@ -124,117 +127,141 @@ export const ProductPage = () => {
       <Rectangle />
       <MainContainer>
         <SectionCar>
-          <CoverImageContainer>
-            <figure>
-              <CoverImage src={advertisement.coverImage} alt="" />
-            </figure>
-          </CoverImageContainer>
-          <CarInformationContainer>
-            <div>
-              <Title>{advertisement.title}</Title>
-              <PriceAndYearContainer>
-                <div>
-                  <Button typeButton="brandOpacity" typeFont="medium">
-                    {advertisement.year}
-                  </Button>
-                  <Button
-                    style={{ marginLeft: 12 }}
-                    typeButton="brandOpacity"
-                    typeFont="medium"
-                  >
-                    {advertisement.km.toLocaleString("pt-br")} KM
-                  </Button>
-                </div>
-                <strong>
-                  {advertisement.price.toLocaleString("pt-br", {
-                    style: "currency",
-                    currency: "BRL",
-                  })}
-                </strong>
-              </PriceAndYearContainer>
-            </div>
-            <Button
-              style={{ marginTop: 15 }}
-              typeButton="brand1"
-              typeFont="big"
-            >
-              Comprar
-            </Button>
-          </CarInformationContainer>
-          <CarDescriptionContainer>
-            <Title>Descrição</Title>
-            <Description>{advertisement.description}</Description>
-          </CarDescriptionContainer>
-          <CommentsContainer>
-            <Title>Comentários</Title>
-            <CommentList>
-              {comments.map((comment) => {
-                return (
-                  <li key={comment.id}>
-                    <Comment
-                      date={comment.createdAt}
-                      textComment={comment.text}
-                      user={comment.user}
+          <FirstDivOfSection>
+            <CoverImageContainer>
+              <figure>
+                <CoverImage src={advertisement.coverImage} alt="" />
+              </figure>
+            </CoverImageContainer>
+            <CarInformationContainer>
+              <div>
+                <Title>{advertisement.title}</Title>
+                <PriceAndYearContainer>
+                  <div>
+                    <Button typeButton="brandOpacity" typeFont="medium">
+                      {advertisement.year}
+                    </Button>
+                    <Button
+                      style={{ marginLeft: 12 }}
+                      typeButton="brandOpacity"
+                      typeFont="medium"
+                    >
+                      {advertisement.km.toLocaleString("pt-br")} KM
+                    </Button>
+                  </div>
+                  <strong>
+                    {advertisement.price.toLocaleString("pt-br", {
+                      style: "currency",
+                      currency: "BRL",
+                    })}
+                  </strong>
+                </PriceAndYearContainer>
+              </div>
+              <Button
+                style={{ marginTop: 15 }}
+                typeButton="brand1"
+                typeFont="big"
+              >
+                Comprar
+              </Button>
+            </CarInformationContainer>
+            <CarDescriptionContainer>
+              <Title>Descrição</Title>
+              <Description>{advertisement.description}</Description>
+            </CarDescriptionContainer>
+          </FirstDivOfSection>
+
+          <Aside>
+            <ImagesContainer>
+              <Title>Fotos</Title>
+              <ul>
+                {advertisement.images.map(({ image, id }) => {
+                  return (
+                    <li key={id}>
+                      <figure>
+                        <img src={image} />
+                      </figure>
+                    </li>
+                  );
+                })}
+              </ul>
+            </ImagesContainer>
+            <UserContainer>
+              <Avatar
+                name={advertisement.user.name}
+                color={advertisement.user.avatarColor}
+                size={104}
+                fontSize={36}
+              />
+              <Title>{advertisement.user.name}</Title>
+              <Description>{advertisement.user.description}</Description>
+              <Button typeButton="default" typeFont="big">
+                Ver todos os anúncios
+              </Button>
+            </UserContainer>
+          </Aside>
+          <SecondDivOfSection>
+            <CommentsContainer>
+              <Title>Comentários</Title>
+              <CommentList>
+                {comments.map((comment) => {
+                  return (
+                    <li key={comment.id}>
+                      <Comment
+                        date={comment.createdAt}
+                        textComment={comment.text}
+                        user={comment.user}
+                      />
+                    </li>
+                  );
+                })}
+              </CommentList>
+            </CommentsContainer>
+            <AddCommentContainer>
+              {userLogged ? (
+                <>
+                  <div>
+                    <Avatar
+                      name={userLogged.name}
+                      color={userLogged.avatarColor}
+                      size={32}
+                      fontSize={14}
                     />
-                  </li>
-                );
-              })}
-            </CommentList>
-          </CommentsContainer>
-          <AddCommentContainer>
-            {userLogged ? (
-              <>
-                <div>
-                  <Avatar
-                    name={userLogged.name}
-                    color={userLogged.avatarColor}
-                    size={32}
-                    fontSize={14}
-                  />
-                  <h4>{formatNameToTwoWords(userLogged.name)}</h4>
-                </div>
-                <Textarea
-                  register={register}
-                  handleSubmit={handleSubmit}
-                  onSubmit={onSubmit}
-                  placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
-                  error={!!errors.text?.message}
-                />
-              </>
-            ) : (
-              <Textarea placeholder="Digite seu comentário" />
-            )}
-          </AddCommentContainer>
+                    <h4>{formatNameToTwoWords(userLogged.name)}</h4>
+                  </div>
+                  <TextareaContainer
+                    error={!!errors.text?.message}
+                    onSubmit={handleSubmit(onSubmit)}
+                  >
+                    <>
+                      <TextareaStyled
+                        {...register("text")}
+                        placeholder="Carro muito confortável, foi uma ótima experiência de compra..."
+                      />
+                      <Button type="submit" typeButton="brand1" typeFont="big">
+                        Comentar
+                      </Button>
+                    </>
+                  </TextareaContainer>
+                </>
+              ) : (
+                <TextareaContainer>
+                  <>
+                    <TextareaStyled placeholder="Digitar comentário" />
+                    <Button
+                      typeButton="brandDisable"
+                      typeFont="big"
+                      onClick={() => history.push("/login")}
+                      style={{ cursor: "default" }}
+                    >
+                      Comentar
+                    </Button>
+                  </>
+                </TextareaContainer>
+              )}
+            </AddCommentContainer>
+          </SecondDivOfSection>
         </SectionCar>
-        <Aside>
-          <ImagesContainer>
-            <Title>Fotos</Title>
-            <ul>
-              {advertisement.images.map(({ image, id }) => {
-                return (
-                  <li key={id}>
-                    <figure>
-                      <img src={image} />
-                    </figure>
-                  </li>
-                );
-              })}
-            </ul>
-          </ImagesContainer>
-          <UserContainer>
-            <Avatar
-              name={advertisement.user.name}
-              color={advertisement.user.avatarColor}
-              size={104}
-              fontSize={36}
-            />
-            <Title>{advertisement.user.name}</Title>
-            <Description>{advertisement.user.description}</Description>
-            <Button typeButton="default" typeFont="big">
-              Ver todos os anúncios
-            </Button>
-          </UserContainer>
-        </Aside>
       </MainContainer>
       <Footer />
     </>
