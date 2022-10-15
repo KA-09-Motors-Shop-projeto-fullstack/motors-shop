@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
-export const Main = styled.main`
-`;
+export const Main = styled.main``;
 
 export const InfoNavContainer = styled.section`
   display: flex;
@@ -37,11 +36,16 @@ export const InfoNavContainer = styled.section`
 
     button {
       color: inherit;
+      width: 100%;
     }
   }
 
-  @media (max-width: 700px) {
-    padding: 10px 10%;
+  @media screen and (max-width: 700px) {
+    padding: 10px;
+    nav {
+      flex-direction: column;
+      width: 100%;
+    }
   }
 `;
 
