@@ -41,8 +41,18 @@ export interface ILoginUserResponse {
   user: IUser;
 }
 
+export interface IUpdateUser {
+  name?: string;
+  email?: string;
+  cpf?: string;
+  phoneNumber?: string;
+  birthDate?: string;
+  description?: string;
+}
+
 export type UserContextType = {
   userLogged: IUser | undefined;
   signupUser: (data: ICreateUser) => Promise<void>;
   loginUser: (data: ILoginUser) => Promise<void>;
+  updateUser: (data: IUpdateUser, token: string) => Promise<void>;
 };

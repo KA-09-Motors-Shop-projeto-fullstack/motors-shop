@@ -17,15 +17,16 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 
 // Types
-import { IUser } from "@/types/users";
+import { UserContextType } from "@/types/users";
 import { ModalContextType } from "@/types/modals";
 
 // Providers
 import { ModalContext } from "@/providers/Modals";
+import { UserContext } from "@/providers/Users";
 
-// Auth
-import { getUserLocalStorage } from "../../../services/auth";
+// Moment
 import moment from "moment";
+import { getTokenLocalStorage } from "services/auth";
 
 // Intefaces
 
@@ -43,9 +44,9 @@ export const ModalEditProfile: React.FC = () => {
   const { modalEditProfileIsOpen, closeModalEditProfile } = useContext(
     ModalContext
   ) as ModalContextType;
-
-  // Definindo os estados
-  const [user] = useState<IUser>(() => getUserLocalStorage());
+  const { userLogged: user, updateUser } = useContext(
+    UserContext
+  ) as UserContextType;
 
   // Hook Form
   const schema = yup.object({
@@ -53,13 +54,7 @@ export const ModalEditProfile: React.FC = () => {
     email: yup.string().email("Email inválido").notRequired(),
     cpf: yup.string().notRequired(),
     phoneNumber: yup.string().notRequired(),
-    birthDate: yup
-      .string()
-      .notRequired()
-      .matches(
-        /^(0?[1-9]|[12][0-9]|3[01])[\/\-](0?[1-9]|1[012])[\/\-]\d{4}$/,
-        "Data de nascimento inválida!"
-      ),
+    birthDate: yup.string().notRequired(),
     description: yup.string().notRequired(),
   });
 
@@ -67,11 +62,27 @@ export const ModalEditProfile: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<IFormProps>({
     resolver: yupResolver(schema),
   });
-  const onSubmit = (data: IFormProps) => console.log(data);
+  const onSubmit = (data: IFormProps) => {
+    for (let i in data) {
+      if ((data as Record<string, string>)[i] == "") {
+        delete (data as Record<string, string>)[i];
+      }
+    }
 
+    if (data.cpf) {
+      data.cpf = data.cpf.replace(/\D+/g, "");
+    }
+    if (data.birthDate) {
+      const [day, month, year] = data.birthDate.split("/");
+      data.birthDate = moment(`${year}-${month}-${day}`).toISOString();
+    }
+
+    updateUser(data, getTokenLocalStorage()).then(() => reset());
+  };
   return (
     <Container>
       <Modal show={modalEditProfileIsOpen} onHide={closeModalEditProfile}>
@@ -83,20 +94,20 @@ export const ModalEditProfile: React.FC = () => {
           <Input
             name="name"
             register={register}
-            placeholder={user.name}
+            placeholder={user?.name}
             label="Nome"
           />
           <Input
             name="email"
             register={register}
-            placeholder={user.email}
+            placeholder={user?.email}
             label="Email"
             error={!!errors.email}
           />
           <Input
             name="cpf"
             register={register}
-            placeholder={user.cpf.replace(
+            placeholder={user?.cpf.replace(
               /(\d{3})(\d{3})(\d{3})(\d{2})/,
               "$1.$2.$3-$4"
             )}
@@ -106,7 +117,7 @@ export const ModalEditProfile: React.FC = () => {
           <Input
             name="phoneNumber"
             register={register}
-            placeholder={user.phoneNumber.replace(
+            placeholder={user?.phoneNumber.replace(
               /^(\d\d)(\d{5})(\d{4}).*/,
               "($1) $2-$3"
             )}
@@ -116,7 +127,7 @@ export const ModalEditProfile: React.FC = () => {
           <Input
             name="birthDate"
             register={register}
-            placeholder={moment(user.birthDate).utc().format("DD/MM/YYYY")}
+            placeholder={moment(user?.birthDate).utc().format("DD/MM/YYYY")}
             label="Data de nascimento"
             error={!!errors.birthDate}
             mask="99/99/9999"
@@ -124,14 +135,21 @@ export const ModalEditProfile: React.FC = () => {
           <Input
             name="description"
             register={register}
-            placeholder={user.description}
+            placeholder={user?.description}
             label="Descrição"
           />
           <ContainerButtons>
-            <Button typeButton="outline1" typeFont="big">
+            <Button
+              onClick={() => {
+                closeModalEditProfile();
+                reset();
+              }}
+              typeButton="outline1"
+              typeFont="big"
+            >
               Cancelar
             </Button>
-            <Button typeButton="brand1" typeFont="big">
+            <Button type="submit" typeButton="brand1" typeFont="big">
               Salvar alterações
             </Button>
           </ContainerButtons>

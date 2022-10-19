@@ -8,6 +8,7 @@ import {
   ICreateUser,
   ILoginUser,
   ILoginUserResponse,
+  IUpdateUser,
   IUser,
   UserContextType,
 } from "../../@types/users";
@@ -65,8 +66,25 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
     return;
   };
 
+  const updateUser = async (data: IUpdateUser, token: string) => {
+    await api
+      .patch<IUser>("/users", data, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .then(({ data }) => {
+        login({ user: data, token });
+        setUserLogged(data);
+        return toast.success("Dados alterados com sucesso!");
+      })
+      .catch(() => toast.error("Ops, algo deu errado!"));
+  };
+
   return (
-    <UserContext.Provider value={{ userLogged, loginUser, signupUser }}>
+    <UserContext.Provider
+      value={{ userLogged, loginUser, signupUser, updateUser }}
+    >
       {children}
     </UserContext.Provider>
   );

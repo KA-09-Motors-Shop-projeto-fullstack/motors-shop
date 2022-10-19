@@ -6,6 +6,7 @@ export const HeaderStyle = styled.header`
   width: 100vw;
   height: 80px;
   padding: 0 50px;
+  z-index: 1;
 
   display: flex;
   justify-content: space-between;
@@ -65,6 +66,7 @@ export const DropdownMenuTriggerDesktop = styled(DropdownMenu.Trigger)`
 
 export const DropdownMenuContentDesktop = styled(DropdownMenu.Content)`
   width: 200px;
+  z-index: 2;
   background: ${(props) => props.theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
@@ -97,6 +99,7 @@ export const DropdownMenuTriggerMobile = styled(DropdownMenu.Trigger)`
 
 export const DropdownMenuContentMobile = styled(DropdownMenu.Content)`
   width: 100vw;
+  z-index: 2;
   background: ${(props) => props.theme.colors.grey9};
   box-shadow: 0px 4px 40px -10px rgba(0, 0, 0, 0.25);
   border-radius: 4px;
