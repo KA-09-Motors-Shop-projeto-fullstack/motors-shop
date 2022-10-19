@@ -18,7 +18,7 @@ import {
 } from "./styles";
 import { UserContext } from "../../providers/Users";
 import { UserContextType } from "../../@types/users";
-import ModalSucess from "../../components/ModalSucess";
+import { ModalSucess } from "@/components/Modal/Sucess";
 import { ModalContext } from "../../providers/Modals";
 import { ModalContextType } from "../../@types/modals";
 import { animateScroll } from "react-scroll";

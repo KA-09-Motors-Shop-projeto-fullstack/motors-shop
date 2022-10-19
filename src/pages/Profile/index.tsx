@@ -4,7 +4,7 @@ import { Avatar } from "../../components/Avatar";
 import { Button } from "../../components/Button";
 import { Footer } from "../../components/Footer";
 import { Header } from "../../components/Header";
-import ModalCreate from "../../components/ModalCreate";
+import { ModalCreate } from "../../components/Modal/CreateAdvertisement";
 import { ModalContext } from "../../providers/Modals";
 import { getUserLocalStorage } from "../../services/auth";
 import {

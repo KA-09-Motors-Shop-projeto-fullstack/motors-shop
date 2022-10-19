@@ -8,23 +8,30 @@ interface IProps {
 export const ModalContext = createContext<ModalContextType | null>(null);
 
 export const ModalProvider: React.FC<IProps> = ({ children }) => {
-  const [showModalSucess, setShowModalSucess] = useState<boolean>(false);
-  const [showModalCreate, setShowModalCreate] = useState<boolean>(false);
+  const [modalSucessIsOpen, setModalSucessIsOpen] = useState<boolean>(false);
+  const [modalCreateIsOpen, setModalCreateIsOpen] = useState<boolean>(false);
+  const [modalEditProfileIsOpen, setModalEditIsOpen] = useState<boolean>(false);
 
-  const openModalCreate = () => setShowModalCreate(true);
-  const openModalSucess = () => setShowModalSucess(true);
-  const closeModalCreate = () => setShowModalCreate(false);
-  const closeModalSucess = () => setShowModalSucess(false);
+  const openModalCreate = () => setModalCreateIsOpen(true);
+  const openModalSucess = () => setModalSucessIsOpen(true);
+  const openModalEditProfile = () => setModalEditIsOpen(true);
+
+  const closeModalCreate = () => setModalCreateIsOpen(false);
+  const closeModalSucess = () => setModalSucessIsOpen(false);
+  const closeModalEditProfile = () => setModalEditIsOpen(false);
 
   return (
     <ModalContext.Provider
       value={{
-        showModalCreate,
-        showModalSucess,
+        modalSucessIsOpen,
+        modalCreateIsOpen,
+        modalEditProfileIsOpen,
         closeModalCreate,
         closeModalSucess,
         openModalCreate,
         openModalSucess,
+        closeModalEditProfile,
+        openModalEditProfile,
       }}
     >
       {children}

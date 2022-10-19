@@ -1,5 +1,10 @@
+// React
 import React, { useContext, useState } from "react";
+
+// Bootstrap
 import { Modal } from "react-bootstrap";
+
+// Styles
 import {
   Container,
   ModalTitle,
@@ -11,29 +16,38 @@ import {
   VehicleTypeContainer,
   ImagesRegisterContainer,
 } from "./styles";
-import { Button } from "../Button";
-import { useHistory } from "react-router-dom";
-import Input from "../Input";
+
+// Components
+import { Button } from "@/components/Button";
+import Input from "@/components/Input";
+import { ModalSucess } from "@/components/Modal/Sucess";
+
+// Hook form e Yup
 import * as yup from "yup";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { AdvertisementContext } from "../../providers/Advertisements";
-import { AdvertisementContextType } from "../../@types/advertisements";
-import ModalSucess from "../ModalSucess";
-import { ModalContext } from "../../providers/Modals";
-import { ModalContextType } from "../../@types/modals";
-import { getTokenLocalStorage } from "../../services/auth";
 
-const ModalCreate: React.FC = () => {
+// Providers
+import { AdvertisementContext } from "@/providers/Advertisements";
+import { ModalContext } from "@/providers/Modals";
+
+// Types
+import { AdvertisementContextType } from "@/types/advertisements";
+import { ModalContextType } from "@/types/modals";
+
+// Auth
+import { getTokenLocalStorage } from "../../../services/auth";
+
+export const ModalCreate: React.FC = () => {
   // Chamando o provider
   const { createAdvertisement } = useContext(
     AdvertisementContext
   ) as AdvertisementContextType;
-  const { closeModalCreate, showModalCreate, openModalSucess } = useContext(
+  const { closeModalCreate, modalCreateIsOpen, openModalSucess } = useContext(
     ModalContext
   ) as ModalContextType;
 
-  // Setando os estados
+  // Definindo os estados
   const [typeAd, setTypeAd] = useState<string>("sale");
   const [vehicleType, setVehicleType] = useState<string>("car");
   const [amountImage, setAmountImages] = useState<number[]>([1]);
@@ -46,7 +60,7 @@ const ModalCreate: React.FC = () => {
   const addMoreImage = () =>
     setAmountImages([...amountImage, amountImage.length + 1]);
 
-  //Schema para o form
+  // Schema para o form
   const schema = yup.object().shape({
     title: yup.string().required("Campo obrigatório"),
     year: yup.string().required("Campo obrigatório"),
@@ -80,10 +94,9 @@ const ModalCreate: React.FC = () => {
       vehicleType,
     };
 
-    reset();
-
     const token = getTokenLocalStorage();
     await createAdvertisement(token, data).then(() => {
+      reset();
       closeModalCreate();
       openModalSucess();
     });
@@ -92,7 +105,7 @@ const ModalCreate: React.FC = () => {
   return (
     <Container>
       <ModalSucess>Seu anúncio foi criado com sucesso!</ModalSucess>
-      <Modal show={showModalCreate} onHide={closeModalCreate}>
+      <Modal show={modalCreateIsOpen} onHide={closeModalCreate}>
         <Modal.Header closeButton>
           <ModalTitle>Criar anúncio</ModalTitle>
         </Modal.Header>
@@ -239,5 +252,3 @@ const ModalCreate: React.FC = () => {
     </Container>
   );
 };
-
-export default ModalCreate;

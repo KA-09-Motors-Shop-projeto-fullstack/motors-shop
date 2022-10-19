@@ -1,15 +1,28 @@
+// React
 import React, { useContext } from "react";
-import { Modal } from "react-bootstrap";
-import { Container, ModalTitle, ParagraphOne, ParagraphTwo } from "./styles";
-import { ModalContext } from "../../providers/Modals";
-import { ModalContextType } from "../../@types/modals";
 
+// Bootstrap
+import { Modal } from "react-bootstrap";
+
+// Styles
+import { Container, ModalTitle, ParagraphOne, ParagraphTwo } from "./styles";
+
+// Providers
+import { ModalContext } from "@/providers/Modals";
+
+// Types
+import { ModalContextType } from "@/types/modals";
+
+// Interfaces
 interface IPropsModalSucess {
   children: React.ReactNode;
   footer?: React.ReactNode;
 }
 
-const ModalSucess: React.FC<IPropsModalSucess> = ({ children, footer }) => {
+export const ModalSucess: React.FC<IPropsModalSucess> = ({
+  children,
+  footer,
+}) => {
   const { showModalSucess, closeModalSucess } = useContext(
     ModalContext
   ) as ModalContextType;
@@ -32,5 +45,3 @@ const ModalSucess: React.FC<IPropsModalSucess> = ({ children, footer }) => {
     </Container>
   );
 };
-
-export default ModalSucess;

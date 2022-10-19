@@ -19,7 +19,6 @@ export const Container = styled.div<IProps>`
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  margin-top: 20px;
   input {
     padding: 20px 16px;
     border: 1.5px solid ${(props) => props.theme.colors.grey7};
@@ -27,7 +26,7 @@ export const Container = styled.div<IProps>`
     color: ${(props) => props.theme.colors.grey1};
     border-radius: 4px;
     height: 25px;
-    width: 280px;
+    min-width: 280px;
     ::placeholder {
       font: ${(props) => props.theme.fonts["input-placeholder"]};
       color: ${(props) => props.theme.colors.grey3};

@@ -3,7 +3,7 @@ import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
 
 export const HeaderStyle = styled.header`
   position: fixed;
-  width: 100%;
+  width: 100vw;
   height: 80px;
   padding: 0 50px;
 

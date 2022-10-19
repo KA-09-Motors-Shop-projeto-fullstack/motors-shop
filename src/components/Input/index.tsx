@@ -4,6 +4,7 @@ import InputMask from "react-input-mask";
 
 export interface IPropsInput extends InputHTMLAttributes<HTMLInputElement> {
   register: any;
+  name: string;
   label?: string;
   error?: boolean;
   mask?: string;
