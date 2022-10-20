@@ -1,3 +1,4 @@
+import { IAddress, IUpdateAddres } from "@/types/adresses";
 import { AxiosError } from "axios";
 import React, { createContext, useContext, useState } from "react";
 import { useHistory } from "react-router-dom";
@@ -14,6 +15,7 @@ import {
 } from "../../@types/users";
 import api from "../../services/api";
 import {
+  getTokenLocalStorage,
   getUserLocalStorage,
   isAuthenticated,
   login,
@@ -31,6 +33,10 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
   const [userLogged, setUserLogged] = useState<IUser | undefined>(
     isAuthenticated() ? getUserLocalStorage() : undefined
   );
+  const [addressUserLogged, setAddressUserLogged] = useState<
+    IAddress | undefined
+  >(userLogged?.address);
+
   const { openModalSucess } = useContext(ModalContext) as ModalContextType;
 
   const loginUser = async (data: ILoginUser) => {
@@ -81,9 +87,31 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
       .catch(() => toast.error("Ops, algo deu errado!"));
   };
 
+  const updateAdress = async (data: IUpdateAddres, token: string) => {
+    api
+      .patch<IUser>("/users/address", data, {
+        headers: {
+          Authorization: `Bearer ${getTokenLocalStorage()}`,
+        },
+      })
+      .then(({ data }) => {
+        login({ user: data, token });
+        setAddressUserLogged(data.address);
+        return toast.success("Dados alterados com sucesso!");
+      })
+      .catch(() => toast.error("Ops, algo deu errado!"));
+  };
+
   return (
     <UserContext.Provider
-      value={{ userLogged, loginUser, signupUser, updateUser }}
+      value={{
+        userLogged,
+        addressUserLogged,
+        loginUser,
+        signupUser,
+        updateUser,
+        updateAdress,
+      }}
     >
       {children}
     </UserContext.Provider>

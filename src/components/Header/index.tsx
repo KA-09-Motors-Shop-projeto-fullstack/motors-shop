@@ -27,6 +27,7 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { ModalContext } from "@/providers/Modals";
 import { ModalContextType } from "@/types/modals";
 import { ModalEditProfile } from "../Modal/EditProfile";
+import { ModalEditAddress } from "@/components/Modal/EditAddress";
 
 interface IPropsHeader {
   children?: ReactNode;
@@ -34,7 +35,9 @@ interface IPropsHeader {
 
 export const Header: React.FC<IPropsHeader> = ({ children }) => {
   const { userLogged } = useContext(UserContext) as UserContextType;
-  const { openModalEditProfile } = useContext(ModalContext) as ModalContextType;
+  const { openModalEditProfile, openModalEditAddress } = useContext(
+    ModalContext
+  ) as ModalContextType;
 
   // Funções para rotas
   const history = useHistory();
@@ -46,6 +49,7 @@ export const Header: React.FC<IPropsHeader> = ({ children }) => {
   return (
     <>
       <ModalEditProfile />
+      <ModalEditAddress />
       <HeaderStyle>
         <img src={Logo} alt="Motors Shop" onClick={() => goHome()} />
         <NavMobile>
@@ -147,7 +151,7 @@ export const Header: React.FC<IPropsHeader> = ({ children }) => {
                     <DropdownMenuItemDesktop onClick={openModalEditProfile}>
                       Editar perfil
                     </DropdownMenuItemDesktop>
-                    <DropdownMenuItemDesktop>
+                    <DropdownMenuItemDesktop onClick={openModalEditAddress}>
                       Editar endereço
                     </DropdownMenuItemDesktop>
                     <DropdownMenuItemDesktop>

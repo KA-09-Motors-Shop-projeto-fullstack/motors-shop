@@ -26,7 +26,6 @@ export const Container = styled.div<IProps>`
     color: ${(props) => props.theme.colors.grey1};
     border-radius: 4px;
     height: 25px;
-    min-width: 280px;
     ::placeholder {
       font: ${(props) => props.theme.fonts["input-placeholder"]};
       color: ${(props) => props.theme.colors.grey3};

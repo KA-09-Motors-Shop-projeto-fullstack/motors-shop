@@ -1,4 +1,4 @@
-import { IAddress } from "./adresses";
+import { IAddress, IUpdateAddres } from "./adresses";
 
 export interface IUser {
   id: string;
@@ -52,7 +52,9 @@ export interface IUpdateUser {
 
 export type UserContextType = {
   userLogged: IUser | undefined;
+  addressUserLogged: IAddress | undefined;
   signupUser: (data: ICreateUser) => Promise<void>;
   loginUser: (data: ILoginUser) => Promise<void>;
   updateUser: (data: IUpdateUser, token: string) => Promise<void>;
+  updateAdress: (data: IUpdateAddres, token: string) => Promise<void>;
 };

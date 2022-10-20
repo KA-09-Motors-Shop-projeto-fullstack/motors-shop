@@ -81,7 +81,10 @@ export const ModalEditProfile: React.FC = () => {
       data.birthDate = moment(`${year}-${month}-${day}`).toISOString();
     }
 
-    updateUser(data, getTokenLocalStorage()).then(() => reset());
+    updateUser(data, getTokenLocalStorage()).then(() => {
+      reset();
+      closeModalEditProfile();
+    });
   };
   return (
     <Container>
