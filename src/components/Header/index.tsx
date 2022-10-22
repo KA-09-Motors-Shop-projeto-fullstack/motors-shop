@@ -1,8 +1,13 @@
+// React and other libs
 import React, { ReactNode, useContext } from "react";
+import { NavLink, useHistory } from "react-router-dom";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { Link as LinkScroll } from "react-scroll";
+
+// Style
 import {
   HeaderStyle,
   Ul,
-  Container,
   Line,
   DropdownMenuTriggerDesktop,
   DropdownMenuContentDesktop,
@@ -13,28 +18,37 @@ import {
   DropdownMenuContentMobile,
   DropdownMenuItemMobile,
 } from "./styles";
+
+// Logo
 import Logo from "../../assets/LogoHeader.svg";
-import { Link as LinkScroll } from "react-scroll";
-import { NavLink, useHistory } from "react-router-dom";
-import { Button } from "../Button";
-import { Avatar } from "../Avatar";
-import { UserContext } from "../../providers/Users";
-import { UserContextType } from "../../@types/users";
-import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
-import { logout } from "../../services/auth";
-import { formatNameToTwoWords } from "../../utils/format-name-to-two-words";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { ModalContext } from "@/providers/Modals";
-import { ModalContextType } from "@/types/modals";
-import { ModalEditProfile } from "../Modal/EditProfile";
+
+// Components
+import { Button } from "@/components/Button";
+import { Avatar } from "@/components/Avatar";
+import { ModalEditProfile } from "@/components/Modal/EditProfile";
 import { ModalEditAddress } from "@/components/Modal/EditAddress";
 
+// Providers
+import { UserContext } from "../../providers/Users";
+import { ModalContext } from "@/providers/Modals";
+
+// Types
+import { UserContextType } from "@/types/users";
+import { ModalContextType } from "@/types/modals";
+
+// Radix
+import * as DropdownMenu from "@radix-ui/react-dropdown-menu";
+
+// Utils
+import { formatNameToTwoWords } from "@/utils/format-name-to-two-words";
+
+// Interface
 interface IPropsHeader {
   children?: ReactNode;
 }
 
 export const Header: React.FC<IPropsHeader> = ({ children }) => {
-  const { userLogged } = useContext(UserContext) as UserContextType;
+  const { userLogged, logout } = useContext(UserContext) as UserContextType;
   const { openModalEditProfile, openModalEditAddress } = useContext(
     ModalContext
   ) as ModalContextType;

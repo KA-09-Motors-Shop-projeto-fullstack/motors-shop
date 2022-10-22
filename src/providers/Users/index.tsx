@@ -1,6 +1,6 @@
 import { IAddress, IUpdateAddres } from "@/types/adresses";
 import { AxiosError } from "axios";
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 import { useHistory } from "react-router-dom";
 import { animateScroll } from "react-scroll";
 import { toast } from "react-toastify";
@@ -30,12 +30,17 @@ export const UserContext = createContext<UserContextType | null>(null);
 
 export const UserProvider: React.FC<IProps> = ({ children }) => {
   const history = useHistory();
-  const [userLogged, setUserLogged] = useState<IUser | undefined>(
-    isAuthenticated() ? getUserLocalStorage() : undefined
-  );
+  const [userLogged, setUserLogged] = useState<IUser | undefined>();
   const [addressUserLogged, setAddressUserLogged] = useState<
     IAddress | undefined
-  >(userLogged?.address);
+  >();
+
+  useEffect(() => {
+    if (isAuthenticated()) {
+      setUserLogged(getUserLocalStorage());
+      setAddressUserLogged(getUserLocalStorage().address);
+    }
+  }, []);
 
   const { openModalSucess } = useContext(ModalContext) as ModalContextType;
 
@@ -102,6 +107,11 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
       .catch(() => toast.error("Ops, algo deu errado!"));
   };
 
+  const logout = () => {
+    localStorage.clear();
+    setUserLogged(undefined);
+  };
+
   return (
     <UserContext.Provider
       value={{
@@ -111,6 +121,7 @@ export const UserProvider: React.FC<IProps> = ({ children }) => {
         signupUser,
         updateUser,
         updateAdress,
+        logout,
       }}
     >
       {children}

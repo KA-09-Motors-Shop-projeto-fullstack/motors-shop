@@ -1,4 +1,5 @@
 import React, { createContext } from "react";
+import { getTokenLocalStorage } from "services/auth";
 import {
   CommentContextType,
   IComment,
@@ -23,7 +24,7 @@ export const CommentProvider: React.FC<IProps> = ({ children }) => {
       comment,
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Authorization: `Bearer ${getTokenLocalStorage()}`,
         },
       }
     );

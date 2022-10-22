@@ -86,7 +86,7 @@ export const ModalEditAddress: React.FC = () => {
 
     updateAdress(data, getTokenLocalStorage()).then(() => {
       reset();
-      closeModalEditAddress()
+      closeModalEditAddress();
     });
   };
   return (

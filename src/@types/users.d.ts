@@ -57,4 +57,5 @@ export type UserContextType = {
   loginUser: (data: ILoginUser) => Promise<void>;
   updateUser: (data: IUpdateUser, token: string) => Promise<void>;
   updateAdress: (data: IUpdateAddres, token: string) => Promise<void>;
+  logout: () => void;
 };

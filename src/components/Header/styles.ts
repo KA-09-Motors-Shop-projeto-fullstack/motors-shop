@@ -37,8 +37,6 @@ export const Ul = styled.ul`
   align-items: center;
 `;
 
-export const Container = styled.div``;
-
 export const Line = styled.li`
   width: 2px;
   height: 79px;
